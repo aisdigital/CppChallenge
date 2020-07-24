@@ -21,19 +21,34 @@ We’re rooting for you. 😁
 - **DO NOT** change the reviewers of your Pull Request.
 
 # Requirements 
-    * Cmake installed
+
+* CMake installed
+
 ## Instructions
-    To run the project use basic cmake commands
-    * `cmake . -B ./build`
-    * `make -C ./build/ CppChallenge`
-    * `./build/CppChallenge` 
+To run the project use basic cmake commands
+
+*  `cmake . -B ./build`
+*  `make -C ./build/ CppChallenge`
+*  `./build/CppChallenge`
 
 After set it all up, let's go to the challenge \o/
 
 ## Challenge 
 
-TODO:
+Given a csv input file `./input/SAT__College_Board__2010_School_Level_Results.csv` what you have to do is:
+
+Create a command line application where you will:
+* Read the csv file and store the data in memory(data don't need to be ordered). (The read of the file can be done on a separated thread)
+* After reading the file we should show the user 3 options in a menu and ask for a number where: 
+
+1. Search by name: It will ask the user to input a string and it will search by **School Name** and show on the screen the results(results should be sorted by name). Asking if the user wants to save the results on a **csv** file where if yes ask the file name(you should store in a directory called `output`), saving it into a file and returning to menu.
+
+2. Search by DBN: It will ask the user to input a string and it will search by **DBN** and show on the screen the result. The DBN is unique so you are allowed to create additional logic to optimize the search. After that return to the menu.
+
+3. Exit the program.
 
 
+* It is not required, unit tests using [gtest](https://github.com/google/googletest) on the 2 search methods are a bonus!
 
 
+Happy Coding! 
