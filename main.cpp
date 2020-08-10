@@ -32,34 +32,70 @@ std::unordered_map<std::string, std::shared_ptr<SatResult>> readResults() {
 
     reader.join();
 
-    // try {
-    //     std::ifstream file("input/SAT__College_Board__2010_School_Level_Results.csv");
-    //     std::string line;
-
-    //     // Read header
-    //     std::getline(file, line);
-    //     CsvReader<SatResult> reader(line, columnSetters);
-
-    //     while (std::getline(file, line)) {
-    //         auto result = reader.readLine(line);
-    //         results[result.Dbn] = result;
-    //     }
-
-    // } catch (std::exception& ex) {
-    //     std::cout << "[Error] An error occurred while reading the CSV." << std::endl;
-    //     std::cout << ex.what() << std::endl;
-    //     exit(1);
-    // }
-
-    std::cout << results.size() << std::endl;
-
-    // for (auto r : results) {
-    //     std::cout << r.second->Dbn << ", " << r.second->SchoolName << ", " << r.second->NumberOfTestTakers << ", " << r.second->CriticalReadingMean << ", " << r.second->MathematicsMean << ", " << r.second->WritingMean << std::endl;
-    // }
-
     return results;
 }
 
+int getUserOption() {
+    std::cout << "\n\n\tChoose an option:\n"
+              << "\t\t1. Search by Name\n"
+              << "\t\t2. Search by DBN\n"
+              << "\t\t3. Exit\n"
+              << "\n\tOption: ";
+
+    int option = -1;
+    std::cin >> option;
+
+    if (!std::cin) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    return option;
+}
+
+void searchByDbn(std::unordered_map<std::string, std::shared_ptr<SatResult>> results) {
+    std::string dbn;
+
+    std::cout << "\n\n\tEnter the DBN:";
+
+    std::cin >> dbn;
+
+    const auto& found = results.find(dbn);
+
+    if (found != results.end()) {
+        std::cout << "\t\tResult found: " + found->second->toCsvLine() << std::endl;
+    } else {
+        std::cout << "\tNo results where found for the DBN " + dbn << std::endl;
+    }
+}
+
 int main(int argc, const char* argv[]) {
-    readResults();
+    auto results = readResults();
+    int userOption;
+
+    do {
+        userOption = getUserOption();
+
+        switch (userOption) {
+            case 1:
+                /* code */
+                break;
+
+            case 2:
+                searchByDbn(results);
+                break;
+
+            case 3:
+                std::cout << "\n\t\t*** Exiting ***\n"
+                          << std::endl;
+                break;
+
+            default:
+                std::cout << "\n\t\t*** INVALID OPTION ***\n"
+                          << std::endl;
+                break;
+        }
+    } while (userOption != 3);
+
+    return 0;
 }

@@ -10,4 +10,6 @@ class SatResult {
     std::string CriticalReadingMean;
     std::string MathematicsMean;
     std::string WritingMean;
+
+    std::string toCsvLine();
 };
