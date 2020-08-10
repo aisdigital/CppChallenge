@@ -2,8 +2,11 @@
 
 #include <iostream>
 
-int main(int argc, const char * argv[]) { 
-  std::cout << "Challenge C++" << std::endl;
-  return 0;
-}
+#include "Menu.h"
 
+int main(const int, const char **)
+{
+  Menu menu;
+
+  return menu.Run();
+}
