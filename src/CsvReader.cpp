@@ -5,7 +5,7 @@
 #include <sstream>
 
 template <class T>
-CsvReader<T>::CsvReader(std::string csvHeader, std::map<std::string, std::function<void(T&, std::string)>> columnSetters) {
+CsvReader<T>::CsvReader(std::string csvHeader, std::map<std::string, std::function<void(T*, std::string)>> columnSetters) {
     this->columnSetters = columnSetters;
     setCsvHeader(csvHeader);
 }
@@ -17,9 +17,9 @@ void CsvReader<T>::setCsvHeader(std::string csvHeader) {
 }
 
 template <class T>
-T CsvReader<T>::readLine(std::string csvLine) {
+T* CsvReader<T>::readLine(std::string csvLine) {
     int valueStart = 0;
-    T data;
+    T* data = new T();
 
     for (int i = 0; i < headerColumns.size(); i++) {
         std::string value;
@@ -47,8 +47,6 @@ T CsvReader<T>::readLine(std::string csvLine) {
             }
 
             value = csvLine.substr(valueStart, valueEnd - valueStart);
-
-            std::cout <<value << std::endl;
 
             // Move the value start to the next column
             if (!isLastValue) {

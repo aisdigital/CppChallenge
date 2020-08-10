@@ -4,6 +4,7 @@ project(CppChallenge)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_CXX_FLAGS -pthread)
 
 include_directories(include)
 
