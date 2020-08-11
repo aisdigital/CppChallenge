@@ -21,8 +21,8 @@ class SatReader {
 
    private:
     std::mutex mutex;
-    std::condition_variable producer_cv;  // The producer waits this variable when it tries to add a new item to the queue but it's full
-    std::condition_variable consumer_cv;  // The consumer waits this variable when it tries to get a item from the queue but it's empty
+    std::condition_variable producer_cv;  // The producer waits on this variable when it tries to add a new item to the buffer but it's full
+    std::condition_variable consumer_cv;  // The consumer waits on this variable when it tries to get a item from the buffer but it's empty
 
     std::thread worker;
     bool hasWorkerStarted = false;
@@ -31,7 +31,7 @@ class SatReader {
     const int maxBufferSize = 5;
     std::queue<std::shared_ptr<SatResult>> buffer;
 
-    // The object SatReader is used to communicate between the worker and main thread
+    // The parameter reader is used to communicate between the worker and main thread
     static void work(SatReader* reader);
-    static void addToQueue(SatReader* reader, SatResult* result);
+    static void addToBuffer(SatReader* reader, SatResult* result);
 };

@@ -50,10 +50,15 @@ T* CsvParser<T>::parseLine(std::string csvLine) {
 
             // Move the valueStart to the next column
             if (!isLastValue) {
-                while (valueStart < csvLine.size() - 1 && csvLine.at(valueStart) != ',') {
+                valueStart = valueEnd + 1;
+
+                // Skip white spaces
+                while (valueStart < csvLine.size() - 1 && csvLine.at(valueStart) == ' ') {
                     valueStart++;
                 }
-                valueStart++;  // Skip the ','
+
+                // Skip the ','
+                valueStart++;
             }
         } else {
             int valueEnd;

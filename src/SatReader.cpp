@@ -61,7 +61,7 @@ void SatReader::work(SatReader* reader) {
 
         while (std::getline(file, line)) {
             auto result = csvParser.parseLine(line);
-            addToQueue(reader, result);
+            addToBuffer(reader, result);
         }
 
         reader->hasWorkerFinished = true;
@@ -78,7 +78,7 @@ void SatReader::work(SatReader* reader) {
     }
 }
 
-void SatReader::addToQueue(SatReader* reader, SatResult* result) {
+void SatReader::addToBuffer(SatReader* reader, SatResult* result) {
     std::unique_lock<std::mutex> lk(reader->mutex);
 
     while (reader->buffer.size() >= reader->maxBufferSize) {

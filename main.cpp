@@ -58,8 +58,8 @@ std::unordered_map<std::string, std::shared_ptr<SatResult>> readResults() {
 
         if (nextResult != nullptr) {
             if (results.find(nextResult->Dbn) != results.end()) {
-                // I made my code thinking that the DBN was unique as specified in the README of the challenge, so i just ignore te duplicated DBNs
-                std::cout << "[WARNING] The DBN " + nextResult->Dbn + " appears multiple times on the CSV, only the value of the first line with this DBN will be considered." << std::endl;
+                // I made my code thinking that the DBN was unique as specified in the README of the challenge, so I just ignore the duplicated DBNs
+                std::cout << "[WARNING] The DBN " + nextResult->Dbn + " appears multiple times on the CSV, only the values of the first line with this DBN will be considered." << std::endl;
                 continue;
             }
 
@@ -100,7 +100,7 @@ void searchByDbn(std::unordered_map<std::string, std::shared_ptr<SatResult>> res
     const auto& found = results.find(dbn);
 
     if (found != results.end()) {
-        std::cout << "\t\tResult found: " + found->second->toCsvLine() << std::endl;
+        std::cout << "\t\tSearch result: " + found->second->toCsvLine() << std::endl;
     } else {
         std::cout << "\tNo results where found for the DBN " + dbn << std::endl;
     }
@@ -124,7 +124,7 @@ void searchByName(std::unordered_map<std::string, std::shared_ptr<SatResult>> re
         std::sort(searchResults.begin(), searchResults.end(),
                   [](const std::shared_ptr<SatResult>& a, const std::shared_ptr<SatResult>& b) { return a->SchoolName < b->SchoolName; });
 
-        std::cout << "\t\tResult found: " << std::endl;
+        std::cout << "\t\tSearch result: " << std::endl;
         for (const auto& fr : searchResults) {
             std::cout << "\t\t\t" + fr->toCsvLine() << std::endl;
         }
@@ -145,7 +145,6 @@ void confirmSaveSearchResult(std::vector<std::shared_ptr<SatResult>> searchResul
     } while (input != "y" && input != "n");
 
     if (input == "y") {
-        const std::string csvExtension = ".csv";
         std::string filename;
 
         std::cout << "\n\n\tType the filename to save the result: ";

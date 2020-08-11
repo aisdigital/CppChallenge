@@ -1,10 +1,18 @@
 #include "SatResult.h"
 
 std::string SatResult::toCsvLine() const {
-    return Dbn + ',' +
-           SchoolName + ',' +
-           NumberOfTestTakers + ',' +
-           CriticalReadingMean + ',' +
-           MathematicsMean + ',' +
-           WritingMean;
+    auto line = Dbn + ',';
+
+    if (SchoolName.find(',') == std::string::npos) {
+        line += SchoolName + ',';
+    } else {
+        line += "\"" + SchoolName + "\",";
+    }
+
+    line += NumberOfTestTakers + ',' +
+            CriticalReadingMean + ',' +
+            MathematicsMean + ',' +
+            WritingMean;
+
+    return line;
 }
