@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "CsvReader.h"
+#include "CsvParser.h"
 
 void SatReader::startThread() {
     if (hasWorkerStarted) {
@@ -57,10 +57,10 @@ void SatReader::work(SatReader* reader) {
 
         // Read header
         std::getline(file, line);
-        CsvReader<SatResult> csvReader(line, columnSetters);
+        CsvParser<SatResult> csvParser(line, columnSetters);
 
         while (std::getline(file, line)) {
-            auto result = csvReader.readLine(line);
+            auto result = csvParser.parseLine(line);
             addToQueue(reader, result);
         }
 

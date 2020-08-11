@@ -9,7 +9,7 @@
 
 class SatReader {
    public:
-   // Start the worker thread to read the SAT CSV
+    // Start the worker thread to read the SAT CSV
     void startThread();
 
     // Returns a pointer to the next element read by the worker.
@@ -21,8 +21,8 @@ class SatReader {
 
    private:
     std::mutex mutex;
-    std::condition_variable producer_cv; // The producer waits this variable when it tries to add a new item to the queue but it's full
-    std::condition_variable consumer_cv; // The consumer waits this variable when it tries to get a item from the queue but it's empty
+    std::condition_variable producer_cv;  // The producer waits this variable when it tries to add a new item to the queue but it's full
+    std::condition_variable consumer_cv;  // The consumer waits this variable when it tries to get a item from the queue but it's empty
 
     std::thread worker;
     bool hasWorkerStarted = false;

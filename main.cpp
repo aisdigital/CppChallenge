@@ -6,7 +6,6 @@
 #include <string>
 #include <unordered_map>
 
-#include "CsvReader.h"
 #include "SatReader.h"
 #include "SatResult.h"
 
@@ -158,8 +157,8 @@ void confirmSaveSearchResult(std::vector<std::shared_ptr<SatResult>> searchResul
 
         std::fstream outputFile("output/" + filename, std::ofstream::out | std::ofstream::trunc);
 
-        if (!outputFile.is_open()){
-            std::cout << "[ERROR] Cannot open the file to save the results" << std:: endl;
+        if (!outputFile.is_open()) {
+            std::cout << "[ERROR] Cannot open the file to save the results" << std::endl;
             return;
         }
 

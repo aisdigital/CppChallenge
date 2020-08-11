@@ -1,4 +1,3 @@
-
 #include "SatResult.h"
 
 std::string SatResult::toCsvLine() const {

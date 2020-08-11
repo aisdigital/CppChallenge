@@ -1,23 +1,23 @@
-#include "CsvReader.h"
+#include "CsvParser.h"
 
 #include <algorithm>
 #include <iostream>
 #include <sstream>
 
 template <class T>
-CsvReader<T>::CsvReader(std::string csvHeader, std::map<std::string, std::function<void(T*, std::string)>> columnSetters) {
+CsvParser<T>::CsvParser(std::string csvHeader, std::map<std::string, std::function<void(T*, std::string)>> columnSetters) {
     this->columnSetters = columnSetters;
     setCsvHeader(csvHeader);
 }
 
 template <class T>
-void CsvReader<T>::setCsvHeader(std::string csvHeader) {
+void CsvParser<T>::setCsvHeader(std::string csvHeader) {
     extractHeaderColumns(csvHeader);
     validateHeaderColumns();
 }
 
 template <class T>
-T* CsvReader<T>::readLine(std::string csvLine) {
+T* CsvParser<T>::parseLine(std::string csvLine) {
     int valueStart = 0;
     T* data = new T();
 
@@ -37,7 +37,7 @@ T* CsvReader<T>::readLine(std::string csvLine) {
         }
 
         if (isValueInsideQuotes) {
-            valueStart +=1; // Skip the quotes
+            valueStart += 1;  // Skip the quotes
 
             auto valueEnd = csvLine.find_first_of("\"", valueStart);
 
@@ -48,7 +48,7 @@ T* CsvReader<T>::readLine(std::string csvLine) {
 
             value = csvLine.substr(valueStart, valueEnd - valueStart);
 
-            // Move the value start to the next column
+            // Move the valueStart to the next column
             if (!isLastValue) {
                 while (valueStart < csvLine.size() - 1 && csvLine.at(valueStart) != ',') {
                     valueStart++;
@@ -82,7 +82,7 @@ T* CsvReader<T>::readLine(std::string csvLine) {
 }
 
 template <class T>
-std::vector<std::string> CsvReader<T>::extractHeaderColumns(std::string csvHeader) {
+std::vector<std::string> CsvParser<T>::extractHeaderColumns(std::string csvHeader) {
     std::stringstream ss(csvHeader);
     std::string column;
 
@@ -94,7 +94,7 @@ std::vector<std::string> CsvReader<T>::extractHeaderColumns(std::string csvHeade
 }
 
 template <class T>
-void CsvReader<T>::validateHeaderColumns() {
+void CsvParser<T>::validateHeaderColumns() {
     // Check if all the expected columns are in the CSV and if there aren't any duplicated column
     for (const auto& columnSetter : columnSetters) {
         const std::string& requiredColumn = columnSetter.first;
