@@ -1,5 +1,6 @@
 // Challenge C++ AISDigital
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -8,6 +9,43 @@
 #include "CsvReader.h"
 #include "SatReader.h"
 #include "SatResult.h"
+
+std::unordered_map<std::string, std::shared_ptr<SatResult>> readResults();
+int getUserOption();
+void searchByDbn(std::unordered_map<std::string, std::shared_ptr<SatResult>> results);
+void searchByName(std::unordered_map<std::string, std::shared_ptr<SatResult>> results);
+void confirmSaveSearchResult(std::vector<std::shared_ptr<SatResult>> searchResults);
+
+int main(int argc, const char* argv[]) {
+    auto results = readResults();
+    int userOption;
+
+    do {
+        userOption = getUserOption();
+
+        switch (userOption) {
+            case 1:
+                searchByName(results);
+                break;
+
+            case 2:
+                searchByDbn(results);
+                break;
+
+            case 3:
+                std::cout << "\n\t\t*** Exiting ***\n"
+                          << std::endl;
+                break;
+
+            default:
+                std::cout << "\n\t\t*** INVALID OPTION ***\n"
+                          << std::endl;
+                break;
+        }
+    } while (userOption != 3);
+
+    return 0;
+}
 
 std::unordered_map<std::string, std::shared_ptr<SatResult>> readResults() {
     std::unordered_map<std::string, std::shared_ptr<SatResult>> results;
@@ -56,7 +94,7 @@ int getUserOption() {
 void searchByDbn(std::unordered_map<std::string, std::shared_ptr<SatResult>> results) {
     std::string dbn;
 
-    std::cout << "\n\n\tEnter the DBN:";
+    std::cout << "\n\n\tEnter the DBN: ";
 
     std::cin >> dbn;
 
@@ -69,33 +107,68 @@ void searchByDbn(std::unordered_map<std::string, std::shared_ptr<SatResult>> res
     }
 }
 
-int main(int argc, const char* argv[]) {
-    auto results = readResults();
-    int userOption;
+void searchByName(std::unordered_map<std::string, std::shared_ptr<SatResult>> results) {
+    std::vector<std::shared_ptr<SatResult>> searchResults;
+    std::string name;
+
+    std::cout << "\n\n\tEnter the name: ";
+
+    std::cin >> name;
+
+    for (const auto& result : results) {
+        if (result.second->SchoolName.find(name) != std::string::npos) {
+            searchResults.push_back(result.second);
+        }
+    }
+
+    if (searchResults.size() != 0) {
+        std::sort(searchResults.begin(), searchResults.end(),
+                  [](const std::shared_ptr<SatResult>& a, const std::shared_ptr<SatResult>& b) { return a->SchoolName < b->SchoolName; });
+
+        std::cout << "\t\tResult found: " << std::endl;
+        for (const auto& fr : searchResults) {
+            std::cout << "\t\t\t" + fr->toCsvLine() << std::endl;
+        }
+
+        confirmSaveSearchResult(searchResults);
+
+    } else {
+        std::cout << "\tNo results where found for the name " + name << std::endl;
+    }
+}
+
+void confirmSaveSearchResult(std::vector<std::shared_ptr<SatResult>> searchResults) {
+    std::string input;
 
     do {
-        userOption = getUserOption();
+        std::cout << "\n\n\tDo you want to save the results? (y/n): ";
+        std::cin >> input;
+    } while (input != "y" && input != "n");
 
-        switch (userOption) {
-            case 1:
-                /* code */
-                break;
+    if (input == "y") {
+        const std::string csvExtension = ".csv";
+        std::string filename;
 
-            case 2:
-                searchByDbn(results);
-                break;
+        std::cout << "\n\n\tType the filename to save the result: ";
+        std::cin >> filename;
 
-            case 3:
-                std::cout << "\n\t\t*** Exiting ***\n"
-                          << std::endl;
-                break;
-
-            default:
-                std::cout << "\n\t\t*** INVALID OPTION ***\n"
-                          << std::endl;
-                break;
+        if (filename.size() == 0) {
+            filename = "output.csv";
         }
-    } while (userOption != 3);
 
-    return 0;
+        std::fstream outputFile("output/" + filename, std::ofstream::out | std::ofstream::trunc);
+
+        if (!outputFile.is_open()){
+            std::cout << "[ERROR] Cannot open the file to save the results" << std:: endl;
+            return;
+        }
+
+        outputFile << "DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean" << std::endl;
+
+        for (const auto& result : searchResults) {
+            outputFile << result->toCsvLine() << std::endl;
+        }
+
+        std::cout << "\tResults saved on output/" + filename << std::endl;
+    }
 }

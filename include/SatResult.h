@@ -11,5 +11,5 @@ class SatResult {
     std::string MathematicsMean;
     std::string WritingMean;
 
-    std::string toCsvLine();
+    std::string toCsvLine() const;
 };
