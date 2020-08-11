@@ -72,8 +72,11 @@ std::string searchByDBN(std::string dbn)
     return "";
 }
 
-int main(int argc, const char * argv[]) { 
-
+/**
+ * User Interface
+ */
+int cli()
+{
   char option = 'q';
   do
   {
@@ -149,7 +152,15 @@ int main(int argc, const char * argv[]) {
 
     
   } while(option != 'q');
-      
+
+  return(0);
+}
+
+
+int main(int argc, const char * argv[]) { 
+
+  // Run GUI
+  cli();    
 
   return(0);
 }
