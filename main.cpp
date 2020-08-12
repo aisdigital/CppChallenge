@@ -11,7 +11,7 @@
 #include <sstream>
 #include <fstream>
 
-
+// CSV: File Format
 // DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean
 
 
@@ -24,6 +24,7 @@ std::vector<std::string> readDatabaseFile(std::string filename)
     std::ifstream inputFile;
     inputFile.open(filename.c_str());
 
+    // Generate List from file content
     if(inputFile.is_open())
     {
         std::string line;
@@ -38,22 +39,24 @@ std::vector<std::string> readDatabaseFile(std::string filename)
 }
 
 /**
- * Write CSV File
+ * Generate CSV File with same format as input file
  */
-int writeOutputFile(std::string filename)
+int writeOutputFile(std::string filename, std::string &reportText)
 {
     std::ofstream outputFile;
+    filename = "output/" + filename;    // Add output dir prefix
+
+    // Generate CSV with same Header 
     outputFile.open(filename.c_str());
-
-    outputFile << "";
-
+    outputFile << "DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n";
+    outputFile << reportText ;
     outputFile.close();
 
     return 0;
 }
 
 /**
- *
+ * Generate CSV filtered by School Name
  */
 std::string searchBySchoolName(std::string &schoolName, std::vector<std::string> &datalist)
 {
@@ -105,7 +108,7 @@ int cli()
       std::cout << "\n╘═══════════════════════╛" << std::endl;
       
       // Read User Input
-      std::cout << ">> Chose Option (1,2,[q]): ";
+      std::cout << ">> Chose Option (1,2,q): ";
       std::cin >> option;
       
       // Evaluate Option
@@ -119,26 +122,28 @@ int cli()
           std::cin >> schoolName;
 
           // Prompt user for write file
-          std::cout << ">> Write output to a file? (y/[n])" << std::endl;
+          std::cout << ">> Write output to a file? (y/[n]): ";
           std::cin >> menuFileInput;
 
+          const std::string databaseFile = "input/SAT__College_Board__2010_School_Level_Results.csv";
+          std::vector<std::string> data = readDatabaseFile(databaseFile);
           if(menuFileInput == 'y')
           {
               // Prompt User for file location
               std::string outputFileName = "report.txt";
-              std::cout << "Name of output file: ";
+              std::cout << ">> Name of output file: ";
               std::cin >> outputFileName;
 
               // Print to file
-              std::vector<std::string> data = readDatabaseFile("input/SAT__College_Board__2010_School_Level_Results.csv");
-              std::cout << "DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n";
-              std::cout << searchBySchoolName(schoolName,data) << std::endl;
+              std::string reportData = searchBySchoolName(schoolName,data);
+              writeOutputFile(outputFileName, reportData);
+
+              std::cout << "Report exported to output/" << outputFileName << " file." <<std::endl;
           }
           else
           {
               // Print to cout
-              std::vector<std::string> data = readDatabaseFile("input/SAT__College_Board__2010_School_Level_Results.csv");
-              std::cout << "DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n";
+              std::cout << "DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean";
               std::cout << searchBySchoolName(schoolName,data) << std::endl;
           }
 
@@ -151,7 +156,6 @@ int cli()
           std::cin >> dbn;
 
           // Read database and Find entry by DBN
-          std::vector<std::string> datalist = readDatabaseFile("input/SAT__College_Board__2010_School_Level_Results.csv");
           std::cout << "DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n";
           std::cout << searchByDBN(dbn, datalist) << std::endl;
 
@@ -164,8 +168,7 @@ int cli()
       {
           std::cout << "Invalid Option!" << std::endl;
       }
-
-    
+ 
   } while(option != 'q');
 
   return(0);
