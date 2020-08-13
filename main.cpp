@@ -1,6 +1,7 @@
 /**
  *  Challenge C++ AISDigital
- *
+ * 
+ *  @version 1.0 Minimal Program
  *  @author Rafael Lima
  */
 
