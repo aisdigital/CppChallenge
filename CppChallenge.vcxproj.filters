@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Users\paulo\Source\Repos\CppChallenge\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SchoolData.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Importer.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="SchoolDataRepository.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandManager.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Users\paulo\Source\Repos\CppChallenge\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{F449DC65-9EED-3A6A-A200-05A89424DF27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{dff421d6-8336-4392-a1a1-997c7b7e22dc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SchoolData.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Importer.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="SchoolDataRepository.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandManager.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
