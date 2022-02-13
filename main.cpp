@@ -13,8 +13,10 @@ int main(int argc, const char * argv[]) {
       std::cerr << "Fatal error." << endl;
     }
     else {
-      std::cout << "Everything is fine." << endl;
+      std::cout << "Everything is fine." << endl << endl;
     }
+
+    search->printResults();
 
     return 0;
 }

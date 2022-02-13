@@ -15,10 +15,6 @@ Search::Search()
     }
     else {
         setStatus(true);
-        // tmp
-        for(int i = 0; i < 10; i++) {
-            cout << this->data.at(i).at(POS_NAME) << " (" << this->data.at(i).at(POS_DBN) << ")" << endl;
-        }
     }
 }
 
@@ -102,8 +98,8 @@ srchFlag Search::readDataCSV(const string &fileName)
 
     return READ_CSV_OK;
 }
-/*
-srchFlag Search::searchByName(const DataCSV &data, DataCSV &results, const string &name)
+
+srchFlag Search::searchByName(const string &name)
 {
     vector< string > valuesDBN;
     vector< string > names;
@@ -115,9 +111,9 @@ srchFlag Search::searchByName(const DataCSV &data, DataCSV &results, const strin
     STR_TO_LOWER(name, lowerName);
 
     // Read each data row to find school names that contain the keyword; store their indexes
-    for(int i = 0; i < data.size(); i++) {
+    for(int i = 0; i < this->data.size(); i++) {
         // Convert to lowercase before searching
-        string schoolName(data.at(i).at(POS_NAME));
+        string schoolName(this->data.at(i).at(POS_NAME));
         STR_TO_LOWER(schoolName, schoolName);
 
         if(schoolName.find(lowerName) != string::npos) {
@@ -131,14 +127,14 @@ srchFlag Search::searchByName(const DataCSV &data, DataCSV &results, const strin
 
     // Sort the names alphabetically
     for(int i = 0; i < iFound.size(); i++) {
-        string minName = data.at(iFound.at(i)).at(POS_NAME);
+        string minName = this->data.at(iFound.at(i)).at(POS_NAME);
         int minIndex = iFound.at(i);
         int jPos;
         for(int j = i + 1; j < iFound.size(); j++) {
-            if(data.at(iFound.at(j)).at(POS_NAME) < minName) {
+            if(this->data.at(iFound.at(j)).at(POS_NAME) < minName) {
                 minIndex = iFound.at(j);
                 jPos = j;
-                minName = data.at(iFound.at(j)).at(POS_NAME); // Redundant, since we save minIndex
+                minName = this->data.at(iFound.at(j)).at(POS_NAME); // Redundant, since we save minIndex
             }
         }
 
@@ -153,14 +149,14 @@ srchFlag Search::searchByName(const DataCSV &data, DataCSV &results, const strin
     // Only the DBN and the school name are saved although it was not clearly specified.
     for(int i = 0; i < iFound.size(); i++) {
         vector< string > schoolDBN;
-        schoolDBN.push_back(data.at(iFound.at(i)).at(POS_DBN));
-        schoolDBN.push_back(data.at(iFound.at(i)).at(POS_NAME));
-        results.push_back(schoolDBN);
+        schoolDBN.push_back(this->data.at(iFound.at(i)).at(POS_DBN));
+        schoolDBN.push_back(this->data.at(iFound.at(i)).at(POS_NAME));
+        this->results.push_back(schoolDBN);
     }
 
    return RES_FOUND;
 }
-
+/*
 srchFlag Search::searchByDBN(const DataCSV &data, DataCSV &results, const string &dbn)
 {
     vector< string > res;
@@ -214,7 +210,7 @@ srchFlag Search::searchByDBN(const DataCSV &data, DataCSV &results, const string
 
     return RES_FOUND;
 }
-
+*/
 void Search::printResults(void)
 {
     // Print the results in the following format: SCHOOL_NAME (DBN)
@@ -228,4 +224,3 @@ void Search::printResults(void)
 
     cout << endl;
 }
-*/

@@ -62,6 +62,8 @@ public:
 
     bool getStatus(void);
 
+    void printResults(void);
+
 private:
     bool status;
 
@@ -73,11 +75,9 @@ private:
 
     srchFlag readDataCSV(const string &fileName);
 
-//    srchFlag searchByName(const DataCSV &data, DataCSV &results, const string &name);
+    srchFlag searchByName(const string &name);
 
 //    srchFlag searchByDBN(const DataCSV &data, DataCSV &results, const string &dbn);
-
-//   void printResults(void);
 };
 
 #endif /* SEARCH_H_ */
