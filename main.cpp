@@ -7,6 +7,7 @@
 
 int main(int argc, const char * argv[]) { 
     Search *search = new Search();
+    int userOpt = 0;
     
     //Check if everything is fine
     if(!search->getStatus()) {
@@ -26,6 +27,11 @@ int main(int argc, const char * argv[]) {
     }
     search->printResults();
 */
+  // Test user interface
+    printMainMenu(userOpt);
+
+    cout << "UserOpt = " << userOpt << endl;
+
     delete search;
 
     return 0;

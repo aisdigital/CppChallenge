@@ -6,8 +6,7 @@
 #define SEARCH_UI_H_
 
 #include <string>
-
-using namespace std;
+#include <iostream>
 
 // The definitions used here could also be contained in a class definition written in search.hpp
 
@@ -18,8 +17,14 @@ using namespace std;
  */
 typedef enum
 {
-    NO_EXP = 0,
+    MAIN_OPT1 = 0,
+    MAIN_OPT2,
+    MAIN_OPT3,
+    DO_EXP,
+    NO_EXP
 } uiFlag;
+
+using namespace std;
 
 void printMainMenu(int &option);
 
