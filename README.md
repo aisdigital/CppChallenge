@@ -52,3 +52,26 @@ Create a command line application where you will:
 
 
 Happy Coding! 
+
+## Instructions
+
+1. Clone googletest
+```
+git clone https://github.com/google/googletest.git
+```
+2. Run
+```
+make
+```
+3. Test
+```
+make tests
+```
+4. Erase /build/
+```
+make clear
+```
+5. Erase /test/build/
+```
+make clear_tests
+```
