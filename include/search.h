@@ -77,7 +77,7 @@ private:
 
     srchFlag exportResults(const string &fileName);
 
-//    srchFlag searchByDBN(const DataCSV &data, DataCSV &results, const string &dbn);
+    srchFlag searchByDBN(const string &dbn);
 };
 
 #endif /* SEARCH_H_ */

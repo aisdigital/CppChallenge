@@ -15,10 +15,6 @@ Search::Search()
     }
     else {
         setStatus(true);
-        searchByName("saTellite");
-        string name(OUTPUT_CSV_PATH);
-        name += "myfile.csv";
-        exportResults(name);
     }
 }
 
@@ -31,6 +27,20 @@ void Search::setStatus(bool newStatus)
 {
     // to-do: check if newStatus is valid
     this->status = newStatus;
+}
+
+void Search::printResults(void)
+{
+    // Print the results in the following format: SCHOOL_NAME (DBN)
+    for(int i = 0; i < this->results.size(); i++) {
+        cout << this->results.at(i).at(POS_NAME)
+             << "(DBN: " 
+             << this->results.at(i).at(POS_DBN)
+             << ")"
+             << endl;       
+    }
+
+    cout << endl;
 }
 
 // ------------ Private methods implementations -------------------------------------
@@ -160,11 +170,10 @@ srchFlag Search::exportResults(const string &fileName)
     return EXP_CSV_OK;
 }
 
-/*
-srchFlag Search::searchByDBN(const DataCSV &data, DataCSV &results, const string &dbn)
+srchFlag Search::searchByDBN(const string &dbn)
 {
     vector< string > res;
-    int maxIndex = data.size() - 1, minIndex = 0, index = data.size() / 2;
+    int maxIndex = this->data.size() - 1, minIndex = 0, index = this->data.size() / 2;
     bool found = false;
     string upperDBN(dbn);
 
@@ -176,15 +185,15 @@ srchFlag Search::searchByDBN(const DataCSV &data, DataCSV &results, const string
 
     // Since the DBN values are ordered, we can use binary search
     while( ((maxIndex - minIndex) > 1) && (found != true) ) {
-        if(upperDBN == data.at(index).at(POS_DBN)) {
+        if(upperDBN == this->data.at(index).at(POS_DBN)) {
             found = true;
         }
-        else if(upperDBN < data.at(index).at(POS_DBN)) {
+        else if(upperDBN < this->data.at(index).at(POS_DBN)) {
             maxIndex = index;
             index = (minIndex + maxIndex) / 2;
         }
         else {
-            // then (upperDBN > data.at(index).at(POS_DBN))
+            // then (upperDBN > this->data.at(index).at(POS_DBN))
             minIndex = index;
             index = (minIndex + maxIndex) / 2;
         }
@@ -193,10 +202,10 @@ srchFlag Search::searchByDBN(const DataCSV &data, DataCSV &results, const string
     // if (found != true), then (maxIndex - minIndex == 1) and the search reached a limit in which there
     // are only three possibilities:
     if(found != true) {
-        if(upperDBN == data.at(minIndex).at(POS_DBN)) {
+        if(upperDBN == this->data.at(minIndex).at(POS_DBN)) {
             index = minIndex;
         }
-        else if(upperDBN == data.at(maxIndex).at(POS_DBN)) {
+        else if(upperDBN == this->data.at(maxIndex).at(POS_DBN)) {
             index = maxIndex;
         }
         else {
@@ -207,24 +216,11 @@ srchFlag Search::searchByDBN(const DataCSV &data, DataCSV &results, const string
 
     // Now that the result index was found, it can be saved.
     // Only the DBN and the school name are saved although it was not clearly specified.
-    res.push_back(data.at(index).at(POS_DBN));
-    res.push_back(data.at(index).at(POS_NAME));
+    res.push_back(this->data.at(index).at(POS_DBN));
+    res.push_back(this->data.at(index).at(POS_NAME));
 
-    results.push_back(res);
+    this->results.push_back(res);
 
     return RES_FOUND;
 }
-*/
-void Search::printResults(void)
-{
-    // Print the results in the following format: SCHOOL_NAME (DBN)
-    for(int i = 0; i < this->results.size(); i++) {
-        cout << this->results.at(i).at(POS_NAME)
-             << "(DBN: " 
-             << this->results.at(i).at(POS_DBN)
-             << ")"
-             << endl;       
-    }
 
-    cout << endl;
-}
