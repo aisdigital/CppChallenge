@@ -25,12 +25,24 @@ void printMainMenu(int &option)
     // to-do: filter user input
     cin >> option;
 }
-/*
+
 void printMainMenuSearchByName(string &keyword)
 {
+    string openMsg("*************************** Search by name ***************************\n\n"\
+                   "Please, enter the keyword to search:");
 
+    string userOpt("Keyword: ");
+
+    cout << openMsg << endl << endl;
+
+    cout << userOpt;
+
+    // to-do: filter the user input
+    getline(cin, keyword); // Use getline() to read spaces as well
+
+    cout << endl;
 }
-
+/*
 uiFlag printExpMenuSearchByName(string &fileName)
 {
 

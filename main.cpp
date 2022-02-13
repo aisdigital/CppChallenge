@@ -8,6 +8,7 @@
 int main(int argc, const char * argv[]) { 
     Search *search = new Search();
     int userOpt = 0;
+    string keyword;
     
     //Check if everything is fine
     if(!search->getStatus()) {
@@ -28,9 +29,12 @@ int main(int argc, const char * argv[]) {
     search->printResults();
 */
   // Test user interface
-    printMainMenu(userOpt);
+    //printMainMenu(userOpt);
 
-    cout << "UserOpt = " << userOpt << endl;
+    // Search by name
+    printMainMenuSearchByName(keyword);
+
+    cout << "Keyword = " << keyword << endl;
 
     delete search;
 
