@@ -56,11 +56,13 @@ class Search
 public:
     Search();
 
-//    void searchMethod(srchFlag method, const string &keyword);
+    srchFlag searchMethod(srchFlag method, const string &keyword);
 
     bool getStatus(void);
 
     void printResults(void);
+
+    srchFlag exportResults(const string &fileName);
 
 private:
     bool status;
@@ -74,8 +76,6 @@ private:
     srchFlag readDataCSV(const string &fileName);
 
     srchFlag searchByName(const string &name);
-
-    srchFlag exportResults(const string &fileName);
 
     srchFlag searchByDBN(const string &dbn);
 };

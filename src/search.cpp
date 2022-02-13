@@ -18,6 +18,23 @@ Search::Search()
     }
 }
 
+srchFlag Search::searchMethod(srchFlag method, const string &keyword)
+{
+    switch(method) {
+        case SEARCH_BY_NAME:
+            return searchByName(keyword);
+            break;
+        case SEARCH_BY_DBN:
+            return searchByDBN(keyword);
+            break;
+        default:
+            // nothing: pass a valid search method!
+            break;
+    };
+
+    return RES_FOUND;
+}
+
 bool Search::getStatus(void)
 {
     return this->status;
@@ -41,6 +58,32 @@ void Search::printResults(void)
     }
 
     cout << endl;
+}
+
+srchFlag Search::exportResults(const string &fileName)
+{
+    ofstream fileCSV(fileName, ios::out); // Assume that fileName does not have any forbidden character
+
+    if(!fileCSV) {
+        return EXP_CSV_FAIL;
+    }
+
+    // Write the columns names
+    fileCSV << this->data.at(0).at(POS_DBN) << ',';
+    fileCSV << this->data.at(0).at(POS_NAME) << endl;
+
+    for(int i = 0; i < this->results.size(); i++) {
+        fileCSV << this->results.at(i).at(POS_DBN) << ',';
+        // Deal with school names that contain ',', putting them within double quotes.
+        if(this->results.at(i).at(POS_NAME).find(",") != string::npos) {
+            fileCSV << '"' << this->results.at(i).at(POS_NAME) << '"' << endl;          
+        }
+        else {
+            fileCSV << this->results.at(i).at(POS_NAME) << endl; 
+        }
+    }
+
+    return EXP_CSV_OK;
 }
 
 // ------------ Private methods implementations -------------------------------------
@@ -101,8 +144,9 @@ srchFlag Search::searchByName(const string &name)
     //transform(name.begin(), name.end(), lowerName.begin(), ::tolower);
     STR_TO_LOWER(name, lowerName);
 
-    // Read each data row to find school names that contain the keyword; store their indexes
-    for(int i = 0; i < this->data.size(); i++) {
+    // Read each data row to find school names that contain the keyword; store their indexes.
+    // Skip the first row which has the columns names.
+    for(int i = 1; i < this->data.size(); i++) {
         // Convert to lowercase before searching
         string schoolName(this->data.at(i).at(POS_NAME));
         STR_TO_LOWER(schoolName, schoolName);
@@ -148,28 +192,6 @@ srchFlag Search::searchByName(const string &name)
    return RES_FOUND;
 }
 
-srchFlag Search::exportResults(const string &fileName)
-{
-    ofstream fileCSV(fileName, ios::out); // Assume that fileName does not have any forbidden character
-
-    if(!fileCSV) {
-        return EXP_CSV_FAIL;
-    }
-
-    for(int i = 0; i < this->data.size(); i++) {
-        fileCSV << this->data.at(i).at(POS_DBN) << ',';
-        // Deal with school names that contain ',', putting them within double quotes.
-        if(this->data.at(i).at(POS_NAME).find(",") != string::npos) {
-            fileCSV << '"' << this->data.at(i).at(POS_NAME) << '"' << endl;          
-        }
-        else {
-            fileCSV << this->data.at(i).at(POS_NAME) << endl; 
-        }
-    }
-
-    return EXP_CSV_OK;
-}
-
 srchFlag Search::searchByDBN(const string &dbn)
 {
     vector< string > res;
@@ -184,6 +206,8 @@ srchFlag Search::searchByDBN(const string &dbn)
     // to-do: handle DBNs in the format DBN1/DBN2
 
     // Since the DBN values are ordered, we can use binary search
+    // P.S.: Since the "DBN" word of the first row is always > any DBN value, skipping the row of
+    //       columns names it is not necessary.
     while( ((maxIndex - minIndex) > 1) && (found != true) ) {
         if(upperDBN == this->data.at(index).at(POS_DBN)) {
             found = true;
