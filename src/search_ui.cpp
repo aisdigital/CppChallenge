@@ -69,11 +69,9 @@ uiFlag printExpMenuSearchByName(string &fileName)
     // to-do: filter forbidden characters
     cin >> fileName;
 
-    fileName = OUTPUT_CSV_PATH + fileName + ".csv";
-
     return DO_EXP;
 }
-
+/*
 void printMenuSearchByDBN(string &dbn)
 {
 
