@@ -8,7 +8,7 @@
 int main(int argc, const char * argv[]) { 
     Search *search = new Search();
     int userOpt = 0;
-    string keyword;
+    string userInput;
     
     //Check if everything is fine
     if(!search->getStatus()) {
@@ -28,13 +28,21 @@ int main(int argc, const char * argv[]) {
     }
     search->printResults();
 */
-  // Test user interface
+// Test user interface
     //printMainMenu(userOpt);
 
     // Search by name
-    printMainMenuSearchByName(keyword);
+    //printMainMenuSearchByName(userInput);
 
-    cout << "Keyword = " << keyword << endl;
+    // Search by name -> export file menu
+    if(printExpMenuSearchByName(userInput) == DO_EXP) {
+        cout << "Export results: " << endl;
+    }
+    else {
+        cout << "No export." << endl;
+    }
+
+    cout << "User input = " << userInput << endl;
 
     delete search;
 

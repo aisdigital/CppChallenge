@@ -42,10 +42,36 @@ void printMainMenuSearchByName(string &keyword)
 
     cout << endl;
 }
-/*
+
 uiFlag printExpMenuSearchByName(string &fileName)
 {
+    string saveOpt;
 
+    string openMsg("*************************** Search by name ***************************");
+
+    string userOpt1("Would you like to export the results? [Y/n] ");
+
+    string userOpt2("Please, enter the name of the file to export: ");
+
+    cout << openMsg << endl << endl;
+
+    cout << userOpt1;
+
+    // to-do: filter the user input
+    cin >> saveOpt;  
+
+    if((saveOpt != "y") && (saveOpt != "Y")) {
+        return NO_EXP;
+    } 
+
+    cout << endl << userOpt2;
+
+    // to-do: filter forbidden characters
+    cin >> fileName;
+
+    fileName = OUTPUT_CSV_PATH + fileName + ".csv";
+
+    return DO_EXP;
 }
 
 void printMenuSearchByDBN(string &dbn)
