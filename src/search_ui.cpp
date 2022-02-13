@@ -2,4 +2,4 @@
  *  \brief Implementation of useful user interface functions.
  */
 
-#include "search_ui.hpp"
+#include "search_ui.h"
