@@ -58,8 +58,6 @@ public:
 
 //    void searchMethod(srchFlag method, const string &keyword);
 
-//    srchFlag exportResults(const DataCSV &data, const string &fileName);
-
     bool getStatus(void);
 
     void printResults(void);
@@ -76,6 +74,8 @@ private:
     srchFlag readDataCSV(const string &fileName);
 
     srchFlag searchByName(const string &name);
+
+    srchFlag exportResults(const string &fileName);
 
 //    srchFlag searchByDBN(const DataCSV &data, DataCSV &results, const string &dbn);
 };

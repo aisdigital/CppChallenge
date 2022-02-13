@@ -15,6 +15,10 @@ Search::Search()
     }
     else {
         setStatus(true);
+        searchByName("saTellite");
+        string name(OUTPUT_CSV_PATH);
+        name += "myfile.csv";
+        exportResults(name);
     }
 }
 
@@ -29,29 +33,6 @@ void Search::setStatus(bool newStatus)
     this->status = newStatus;
 }
 
-/*
-srchFlag Search::exportResults(const DataCSV &data, const string &fileName)
-{
-    ofstream fileCSV(fileName, ios::out); // Assume that fileName does not have any forbidden character
-
-    if(!fileCSV) {
-        return EXP_CSV_FAIL;
-    }
-
-    for(int i = 0; i < data.size(); i++) {
-        fileCSV << data.at(i).at(POS_DBN) << ',';
-        // Deal with school names that contain ',', putting them within double quotes.
-        if(data.at(i).at(POS_NAME).find(",") != string::npos) {
-            fileCSV << '"' << data.at(i).at(POS_NAME) << '"' << endl;          
-        }
-        else {
-            fileCSV << data.at(i).at(POS_NAME) << endl; 
-        }
-    }
-
-    return EXP_CSV_OK;
-}
-*/
 // ------------ Private methods implementations -------------------------------------
 
 srchFlag Search::readDataCSV(const string &fileName)
@@ -156,6 +137,29 @@ srchFlag Search::searchByName(const string &name)
 
    return RES_FOUND;
 }
+
+srchFlag Search::exportResults(const string &fileName)
+{
+    ofstream fileCSV(fileName, ios::out); // Assume that fileName does not have any forbidden character
+
+    if(!fileCSV) {
+        return EXP_CSV_FAIL;
+    }
+
+    for(int i = 0; i < this->data.size(); i++) {
+        fileCSV << this->data.at(i).at(POS_DBN) << ',';
+        // Deal with school names that contain ',', putting them within double quotes.
+        if(this->data.at(i).at(POS_NAME).find(",") != string::npos) {
+            fileCSV << '"' << this->data.at(i).at(POS_NAME) << '"' << endl;          
+        }
+        else {
+            fileCSV << this->data.at(i).at(POS_NAME) << endl; 
+        }
+    }
+
+    return EXP_CSV_OK;
+}
+
 /*
 srchFlag Search::searchByDBN(const DataCSV &data, DataCSV &results, const string &dbn)
 {
