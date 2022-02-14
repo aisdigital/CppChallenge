@@ -37,6 +37,9 @@ void printMainMenuSearchByName(string &keyword)
 
     cout << userOpt;
 
+    // Clearing the cin buffer
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     // to-do: filter the user input
     getline(cin, keyword); // Use getline() to read spaces as well
 

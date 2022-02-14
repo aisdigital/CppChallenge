@@ -7,6 +7,7 @@
 
 #include <string>
 #include <iostream>
+#include <limits>
 
 // The definitions used here could also be contained in a class definition written in search.hpp
 
@@ -17,7 +18,7 @@
  */
 typedef enum
 {
-    MAIN_OPT1 = 0,
+    MAIN_OPT1 = 1,
     MAIN_OPT2,
     MAIN_OPT3,
     DO_EXP,

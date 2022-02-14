@@ -9,13 +9,47 @@ int main(int argc, const char * argv[]) {
     Search *search = new Search();
     int userOpt = 0;
     string keyword, fileName;
+    //tmp
+    bool exit = false; 
     
     //Check if everything is fine
     if(!search->getStatus()) {
       std::cerr << "Fatal error." << std::endl;
     }
-    else {
-      std::cout << "Everything is fine." << std::endl << std::endl;
+
+    // to-do: implement the program logic more elegantly using a state machine or a class
+    while(!exit) {
+        // Print main menu and get the user's chosen option
+        printMainMenu(userOpt);
+
+        switch(userOpt) {
+            case MAIN_OPT1:
+                // Print the 'search by name' menu and get the user's keyword 
+                printMainMenuSearchByName(keyword);
+                //cout << "Typed keyword: " << keyword << endl;
+                // Apply 'search by name' method
+                if(search->searchMethod(SEARCH_BY_NAME, keyword) == RES_NOT_FOUND) {
+                    std::cout << "No results found." << std::endl;
+                }
+                else {
+                    // Print the results on the screen
+                    search->printResults();
+                    // Print the 'search by name -> export file' menu and get user's fileName
+                    if(printExpMenuSearchByName(fileName) == DO_EXP) {
+                        if(search->exportResults(fileName) == EXP_CSV_FAIL) {
+                            std::cout << "Fail to export results." << std::endl;
+                        }
+                        else {
+                            std::cout << endl << "Results data exported. " << std::endl;
+                        }
+                    }
+                }
+                break;
+            default:
+                exit = true;
+                std::cout << "Option to be implemented yet." << std::endl;
+                break;
+        };
     }
 
 /*
