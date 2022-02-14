@@ -62,7 +62,10 @@ void Search::printResults(void)
 
 srchFlag Search::exportResults(const string &fileName)
 {
-    ofstream fileCSV(fileName, ios::out); // Assume that fileName does not have any forbidden character
+    // Add the path and extension to fileName
+    string fName(OUTPUT_CSV_PATH + fileName + ".csv");
+
+    ofstream fileCSV(fName, ios::out); // Assume that fName does not have any forbidden character
 
     if(!fileCSV) {
         return EXP_CSV_FAIL;
