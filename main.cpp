@@ -24,12 +24,13 @@ int main(int argc, const char * argv[]) {
 
         switch(userOpt) {
             case MAIN_OPT1:
+                // Clear the results container first
+                search->clearResults();
                 // Print the 'search by name' menu and get the user's keyword 
                 printMainMenuSearchByName(keyword);
-                //cout << "Typed keyword: " << keyword << endl;
                 // Apply 'search by name' method
                 if(search->searchMethod(SEARCH_BY_NAME, keyword) == RES_NOT_FOUND) {
-                    std::cout << "No results found." << std::endl;
+                    std::cout << std::endl << "No results were found!" << std::endl << std::endl;
                 }
                 else {
                     // Print the results on the screen
@@ -40,9 +41,23 @@ int main(int argc, const char * argv[]) {
                             std::cout << "Fail to export results." << std::endl;
                         }
                         else {
-                            std::cout << endl << "Results data exported. " << std::endl;
+                            std::cout << std::endl << "Results data exported. " << std::endl << std::endl;
                         }
                     }
+                }
+                break;
+            case MAIN_OPT2:
+                // Clear the results container first
+                search->clearResults();
+                // Print the 'search by DBN' menu
+                printMenuSearchByDBN(keyword);
+                // Apply 'search by DBN' method
+                if(search->searchMethod(SEARCH_BY_DBN, keyword) == RES_NOT_FOUND) {
+                    std::cout << std::endl << "No results were found!" << std::endl << std::endl;
+                }
+                else {
+                    // Print the results on the screen
+                    search->printResults();
                 }
                 break;
             default:

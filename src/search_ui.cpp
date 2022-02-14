@@ -24,6 +24,8 @@ void printMainMenu(int &option)
 
     // to-do: filter user input
     cin >> option;
+
+    cout << endl;
 }
 
 void printMainMenuSearchByName(string &keyword)
@@ -86,6 +88,11 @@ void printMenuSearchByDBN(string &dbn)
 
     cout << userOpt;
 
+    // Clearing the cin buffer
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     // to-do: filter the user input
     cin >> dbn;
+
+    cout << endl;
 }

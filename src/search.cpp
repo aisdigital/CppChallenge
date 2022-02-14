@@ -60,6 +60,11 @@ void Search::printResults(void)
     cout << endl;
 }
 
+void Search::clearResults(void)
+{
+    this->results.clear();
+}
+
 srchFlag Search::exportResults(const string &fileName)
 {
     // Add the path and extension to fileName

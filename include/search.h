@@ -62,6 +62,8 @@ public:
 
     void printResults(void);
 
+    void clearResults(void);
+
     srchFlag exportResults(const string &fileName);
 
 private:
