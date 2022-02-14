@@ -147,7 +147,7 @@ srchFlag Search::searchByName(const string &name)
     vector< string > names;
     vector< int > iFound;
 
-    // The search procedure should be case independent
+    // The search procedure should be case insensitive
     string lowerName(name);
     //transform(name.begin(), name.end(), lowerName.begin(), ::tolower);
     STR_TO_LOWER(name, lowerName);
@@ -207,7 +207,7 @@ srchFlag Search::searchByDBN(const string &dbn)
     bool found = false;
     string upperDBN(dbn);
 
-    // The search procedure should be case independent. Since the DBNs in the CSV file are always upper
+    // The search procedure should be case insensitive. Since the DBNs in the CSV file are always upper
     // case:
     STR_TO_UPPER(dbn, upperDBN);
 

@@ -30,7 +30,7 @@ int main(int argc, const char * argv[]) {
                 printMainMenuSearchByName(keyword);
                 // Apply 'search by name' method
                 if(search->searchMethod(SEARCH_BY_NAME, keyword) == RES_NOT_FOUND) {
-                    std::cout << std::endl << "No results were found!" << std::endl << std::endl;
+                    std::cout << "No results were found!" << std::endl << std::endl;
                 }
                 else {
                     // Print the results on the screen
@@ -38,10 +38,10 @@ int main(int argc, const char * argv[]) {
                     // Print the 'search by name -> export file' menu and get user's fileName
                     if(printExpMenuSearchByName(fileName) == DO_EXP) {
                         if(search->exportResults(fileName) == EXP_CSV_FAIL) {
-                            std::cout << "Fail to export results." << std::endl;
+                            std::cout << "Fail to export results." << std::endl << std::endl;
                         }
                         else {
-                            std::cout << std::endl << "Results data exported. " << std::endl << std::endl;
+                            std::cout << "Results exported. " << std::endl << std::endl;
                         }
                     }
                 }
@@ -53,16 +53,18 @@ int main(int argc, const char * argv[]) {
                 printMenuSearchByDBN(keyword);
                 // Apply 'search by DBN' method
                 if(search->searchMethod(SEARCH_BY_DBN, keyword) == RES_NOT_FOUND) {
-                    std::cout << std::endl << "No results were found!" << std::endl << std::endl;
+                    std::cout << "No results were found!" << std::endl << std::endl;
                 }
                 else {
                     // Print the results on the screen
                     search->printResults();
                 }
                 break;
+            case MAIN_OPT3:
+                exit = true;
+                break;
             default:
                 exit = true;
-                std::cout << "Option to be implemented yet." << std::endl;
                 break;
         };
     }

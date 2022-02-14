@@ -71,8 +71,12 @@ uiFlag printExpMenuSearchByName(string &fileName)
 
     cout << endl << userOpt2;
 
+    // Clearing the cin buffer
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     // to-do: filter forbidden characters
     cin >> fileName;
+
+    cout << endl;
 
     return DO_EXP;
 }
