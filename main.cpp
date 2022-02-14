@@ -31,10 +31,10 @@ int main(int argc, const char * argv[]) {
 // Test user interface
     //printMainMenu(userOpt);
 
-    // Search by name
+    // Search by name menu
     //printMainMenuSearchByName(keyword);
 
-    // Search by name -> export file menu
+/*    // Search by name -> export file menu
     if(printExpMenuSearchByName(fileName) == DO_EXP) {
         cout << "Export results: " << endl;
     }
@@ -42,8 +42,11 @@ int main(int argc, const char * argv[]) {
         cout << "No export." << endl;
     }
 
-    cout << "User input = " << fileName << endl;
+    // Search by DBN menu
+    printMenuSearchByDBN(keyword);
 
+    cout << "User input = " << keyword << endl;
+*/
     delete search;
 
     return 0;

@@ -71,9 +71,18 @@ uiFlag printExpMenuSearchByName(string &fileName)
 
     return DO_EXP;
 }
-/*
+
 void printMenuSearchByDBN(string &dbn)
 {
+    string openMsg("*************************** Search by DBN ****************************\n\n"\
+                   "Please, enter the school DBN:");
 
+    string userOpt("DBN: ");
+
+    cout << openMsg << endl << endl;
+
+    cout << userOpt;
+
+    // to-do: filter the user input
+    cin >> dbn;
 }
-*/
