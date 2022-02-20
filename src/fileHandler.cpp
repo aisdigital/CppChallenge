@@ -24,7 +24,7 @@ FileHandler::~FileHandler(){
 }
 
 void FileHandler::saveDataToFile( std::vector<DbnEntry> entries, std::string filename ){
-  // TODO: create directory
+  // TODO: create method to create output directories
   std::ofstream csvFile( "output/" + filename );
   if( csvFile.is_open() == false ){
     std::cout << "\nFailed to write .csv file. Aborting..." << std::endl;
