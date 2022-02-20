@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_CPPCHECK "cppcheck")
+#set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_CXX_CPPCHECK "cppcheck")
 
 include_directories(include)
 
