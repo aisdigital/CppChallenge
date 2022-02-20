@@ -1,11 +1,9 @@
 #ifndef FILE_HANDLER
 #define FILE_HANDLER
 
-#include <cstddef>
 #include <map>
 #include <mutex>
 #include <string>
-#include <vector>
 
 #include "dbnEntryStruct.h"
 
@@ -14,7 +12,7 @@ class FileHandler{
     FileHandler();
     ~FileHandler();
 
-    void saveDataToFile( std::vector< DbnEntry >, std::string );
+    void saveDataToFile( const std::map< std::string, DbnEntry >&, std::string );
     std::map< std::string, DbnEntry >& getData();
 
   private:

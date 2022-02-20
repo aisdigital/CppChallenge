@@ -3,12 +3,8 @@
 #include <cstddef>
 #include <fstream>
 #include <iostream>
-#include <stdlib.h>
-#include <string>
-#include <thread>
 
 #include "csvParser.h"
-#include "dbnEntryStruct.h"
 
 #define CSV_FILE_PATH "input/SAT__College_Board__2010_School_Level_Results.csv"
 #define CSV_HEADER "DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean"
@@ -23,17 +19,20 @@ FileHandler::FileHandler(){
 FileHandler::~FileHandler(){
 }
 
-void FileHandler::saveDataToFile( std::vector<DbnEntry> entries, std::string filename ){
-  // TODO: create method to create output directories
+void FileHandler::saveDataToFile(
+    const std::map< std::string, DbnEntry >& entries,
+    std::string filename ){
+  // TODO: method to create output directories
   std::ofstream csvFile( "output/" + filename );
   if( csvFile.is_open() == false ){
     std::cout << "\nFailed to write .csv file. Aborting..." << std::endl;
     abort();
   }
   csvFile << std::string( CSV_HEADER ) << std::endl;
-  for( auto entry : entries ){
-    csvFile << CsvParser::parseStructToLine( entry ) << std::endl;
+  for( auto& entry : entries ){
+    csvFile << CsvParser::parseStructToLine( entry.second ) << std::endl;
   }
+  std::cout << "Output file successfully created" << std::endl;
 }
 
 std::map< std::string, DbnEntry >& FileHandler::getData(){

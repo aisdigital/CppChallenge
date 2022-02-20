@@ -7,6 +7,8 @@
 
 class CsvParser{
   public:
+    CsvParser() = delete;
+
     static DbnEntry parseLineToStruct( std::string );
     static std::string parseStructToLine( DbnEntry );
 
