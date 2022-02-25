@@ -15,21 +15,57 @@ class SATResultsManager
     private:
         map<string, string> m_SATResults;
 
+        /**
+         * @brief Split line into fields based on CSV representation.
+         * 
+         * @param line Input line.
+         * 
+         * @return Separated values.
+         */
         vector<string> splitLine(string line);
 
+        /**
+         * @brief Check if a line is a CSV file header in the expected format.
+         * 
+         * @param line Input line.
+         * 
+         * @return true if it is a header.
+         */
         bool isHeader(string line);
 
+        /**
+         * @brief Check if line contains the expected number of fields.
+         * 
+         * @param line Input line.
+         * 
+         * @return true if it's the expected format.
+         */
         bool checkFields(string line);
 
+        /**
+         * @brief Extract DBN from a string representation of a SATResult.
+         * 
+         * @param line Input line.
+         * 
+         * @return DBN code, as a string.
+         */
         string extractDBN(string line);
 
+        /**
+         * @brief Extract school name related to SAT result.
+         * 
+         * @param line Input line.
+         * 
+         * @return School Name.
+         */
         string extractName(string line);
 
     public:
         /**
          * @brief Adds data to the manager.
          *  
-         * @param data Data to be inserted.
+         * @param data Data to be inserted. Each string is a CSV representation
+         *             for a SATResult.
          * 
          * @return True if we could add all data.
          */
