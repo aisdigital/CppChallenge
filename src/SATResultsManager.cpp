@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-vector<string> SATResultsManager::splitLine(string line)
+vector<string> SATResultsManager::splitCSVLine(string line)
 {
     int start=0, pos;
     string token;
@@ -13,6 +13,12 @@ vector<string> SATResultsManager::splitLine(string line)
     while(pos != string::npos)
     {
         token = line.substr(start, pos-start);
+        if(token[0] == '\"')
+        {
+            pos = line.find('\"', pos)+1;
+            token = line.substr(start, pos-start);
+        }
+
         result.push_back(token);
 
         start = pos+1;
@@ -39,7 +45,7 @@ bool SATResultsManager::isHeader(string line)
 
 bool SATResultsManager::checkFields(string line)
 {
-    vector<string> fields = splitLine(line);
+    vector<string> fields = splitCSVLine(line);
     if(fields.size() == 6)
         return true;
 
@@ -48,14 +54,14 @@ bool SATResultsManager::checkFields(string line)
 
 string SATResultsManager::extractDBN(string line)
 {
-    vector<string> fields = splitLine(line);
+    vector<string> fields = splitCSVLine(line);
 
     return fields[0];
 }
 
 string SATResultsManager::extractName(string line)
 {
-    vector<string> fields = splitLine(line);
+    vector<string> fields = splitCSVLine(line);
 
     return fields[1];
 }

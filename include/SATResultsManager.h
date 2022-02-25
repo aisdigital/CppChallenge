@@ -22,7 +22,7 @@ class SATResultsManager
          * 
          * @return Separated values.
          */
-        vector<string> splitLine(string line);
+        vector<string> splitCSVLine(string line);
 
         /**
          * @brief Check if a line is a CSV file header in the expected format.
