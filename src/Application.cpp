@@ -6,13 +6,13 @@
 
 using std::string;
 
-Application::Application(string inputFile) : m_inputFile{ inputFile }
-{
-}
+Application::Application(string inputFile) : m_inputFile{ inputFile } {}
 
 void Application::execute()
 {
     FileReader reader;
+
+    interface.showMessage("Reading data from \""+m_inputFile+"\"");
 
     if( ! reader.openFile(m_inputFile))
     {
@@ -35,7 +35,7 @@ void Application::runMainLoop()
     bool exit = false;
     int userOption;
 
-    while (true)
+    while (!exit)
     {
         interface.reset();
         printMainMenu();
@@ -76,13 +76,13 @@ void Application::searchByName()
     name = interface.getUserString();
 
     interface.reset();
-    interface.showMessage("Results:");
+    interface.showMessage("Results:\n");
 
     results = manager.findByName(name);
     for(it=results.begin() ; it!=results.end() ; it++)
         interface.showMessage(*it);
 
-    interface.showMessage("Do you wish to save this result to a file?");
+    interface.showMessage("\nDo you wish to save this result to a file?");
     if (interface.getUserOption({"Yes", "No"}) == 0)
         storeResults(name, results);
 }
@@ -103,7 +103,7 @@ void Application::storeResults(string name, list<string> &results)
         writer.writeLine(*it);
 }
 
-void Application::searchByName()
+void Application::searchByDBN()
 {
     string code;
     string result;
@@ -113,10 +113,10 @@ void Application::searchByName()
     code = interface.getUserString();
 
     interface.reset();
-    interface.showMessage("Result:");
+    interface.showMessage("Result:\n");
 
     result = manager.findByDBN(code);
-    interface.showMessage(result);
+    interface.showMessage(result+"\n");
 
     interface.waitUser();
 }

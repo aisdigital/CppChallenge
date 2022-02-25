@@ -1,11 +1,30 @@
+#pragma once
+
 #include <string>
 #include <list>
+#include <map>
+#include <vector>
 
 using std::string;
 using std::list;
+using std::map;
+using std::vector;
 
 class SATResultsManager
 {
+    private:
+        map<string, string> m_SATResults;
+
+        vector<string> splitLine(string line);
+
+        bool isHeader(string line);
+
+        bool checkFields(string line);
+
+        string extractDBN(string line);
+
+        string extractName(string line);
+
     public:
         /**
          * @brief Adds data to the manager.

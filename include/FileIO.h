@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <fstream>
 
@@ -6,7 +8,7 @@ using std::fstream;
 
 class FileIO 
 {
-    private:
+    protected:
         fstream m_fstream;
 
     public:
@@ -20,4 +22,9 @@ class FileIO
          * @return true on Success.
          */
         virtual bool openFile(string fileName) = 0;
+
+        /**
+         * @brief Close file associated with object.
+         */
+        void closeFile();
 };

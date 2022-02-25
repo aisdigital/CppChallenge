@@ -1,4 +1,10 @@
+#pragma once
+
+#include <list>
+
 #include "FileIO.h"
+
+using std::list;
 
 class FileReader : FileIO
 {
@@ -17,5 +23,5 @@ class FileReader : FileIO
          * 
          * @return list with lines.
          */
-        list<string > getLines();
+        list<string> getLines();
 };
