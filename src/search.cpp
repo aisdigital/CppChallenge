@@ -76,7 +76,6 @@ vector<string> Search::sortData(vector<string> data)
 
 void Search::showResult(vector<string> finalResult)
 {
-    std::cout << "showResult()" << std::endl;
     for(int i = 0; i < finalResult.size(); i++)
     {
         std::cout << finalResult[i] << std::endl;
