@@ -39,6 +39,15 @@ vector<string> Search::searchDbn(string filter)
 {
     vector<string> file = CsvFile::getInstance()->getCsvFile();
     vector<string> result;
+
+    for(int i = 0; i < file.size(); i++)
+    {
+        if(file[i].find(filter) != string::npos)
+        {
+            result.push_back(file[i]);
+        }
+    }
+    
     return result;
 }
 

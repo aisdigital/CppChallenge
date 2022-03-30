@@ -42,7 +42,9 @@ void SearchMenu::manageSearch(int searchMode)
     case SEARCH_BY_DBN_MODE:
         std::cout << "Search by dbn: ";
         std::cin >> input;
-        m_search->searchDbn(input);
+        m_result = m_search->searchDbn(input);
+        m_search->showResult(m_result);
+        showMenu();
         break;
     case EXIT_PROGRAM:
         std::cout << "Exit" << std::endl;
