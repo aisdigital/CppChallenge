@@ -21,12 +21,6 @@ CsvFile* CsvFile::getInstance()
     return m_instance;
 }
 
-void CsvFile::deleteInstance()
-{
-    delete m_instance;
-    m_instance = nullptr;
-}
-
 void CsvFile::setCsvFile(vector<string> newCsvFile)
 {
     m_csvFile = newCsvFile;

@@ -1,4 +1,5 @@
 #include "searchmenu.h"
+#include "csvfile.h"
 #include <iostream>
 
 using std::iostream;
