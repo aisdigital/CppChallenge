@@ -1,13 +1,13 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 
 project(CppChallenge)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(include)
+include_directories(src)
+include_directories(input)
 
-FILE(GLOB HEADERS include/*.h)
-FILE(GLOB SRC src/*.cpp)
-
-add_executable(CppChallenge src/main.cpp ${HEADERS} ${SRC})
+add_subdirectory(src)
+add_subdirectory(tests)
+add_subdirectory(lib/googletest)

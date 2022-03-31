@@ -1,7 +1,6 @@
 #include "savecsvfile.h"
 
 #include <fstream>
-#include <iostream>
 #include <bits/stdc++.h>
 #include <iostream>
 #include <sys/stat.h>
@@ -27,7 +26,6 @@ bool SaveCsvFile::save(vector<string> data, string name)
     if(createOutputPath())
     {
         string outputPath = OUTPUT_CSV_FILE_PATH + name + CSV_EXTENSION;
-        std::cout << outputPath << std::endl;
 
         newFile.open(outputPath, std::ios::out | std::ios::app);
 
@@ -51,8 +49,6 @@ bool SaveCsvFile::createOutputPath()
     if(!folderExists(OUTPUT_CSV_FILE_PATH))
     {
         int createResult = mkdir(OUTPUT_CSV_FILE_PATH, 0777);
-
-        std::cout << createResult << std::endl;
 
         if(createResult == 0)
         {

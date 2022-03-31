@@ -33,7 +33,7 @@ void ReadCsvFile::read()
     if(!fileReaded.empty())
     {
         m_csvFile->setCsvFile(fileReaded);
-        std::cout << CSV_FILE_PATH << " is open!"  << std::endl;
+        std::cout << "The file " << CSV_FILE_PATH << " is open!"  << std::endl;
     }
     else
     {

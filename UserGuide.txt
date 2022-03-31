@@ -1,0 +1,22 @@
+--------------------------------------------------------------------
+-----------    Cpp Challenge - Claudio Toledo Filho    -------------
+--------------------------------------------------------------------
+------------------------    Instructions    ------------------------
+--------------------------------------------------------------------
+
+->To build the project:
+
+1 - cmake -S . -B build
+2 - cd build/
+3 - make all
+4 - cd ..
+
+->To run the project:
+
+1 - ./build/src/CppChallenge_run
+
+->To run the project tests:
+
+1 - ./build/tests/CppChallenge_test
+
+
