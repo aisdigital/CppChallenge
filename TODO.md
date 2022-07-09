@@ -5,11 +5,11 @@ Challenge described at [README.md](README.md).
 ## Tasks
 
 ### Infra
- * [ ] Install `C++` and `CMake`
+ * [x] Install `C++` and `CMake`
  * [ ] Install `gtest`
 
 ### Challenge
- * [ ] Create Class to represent each School Level Result
+ * [x] Create Class to represent each School Level Result
  * [ ] Create CSV Reader
  * [ ] Create Parser from CSV line format to School Model
  * [ ] Create Search by DBN method
