@@ -14,10 +14,10 @@ We’re rooting for you. 😁
 ## Steps
 
 - Fork the repository.
-- Create a branch (from master branch) with the following pattern:
-  Use your name as branch's name, eg:
+- Create a branch (from the master branch) with the following pattern:
+  Use your name as the branch's name, eg:
   Considering that my name is José da Silva the branch name should be: "feature/jose_silva"
-- Work **only** on your branch, and after you finish, create a Pull Request targeting "master" branch on this repository.
+- Work **only** on your branch, and after you finish, create a Pull Request targeting the "master" branch on this repository.
 - **DO NOT** change the reviewers of your Pull Request.
 
 # Requirements 
@@ -41,7 +41,7 @@ Create a command-line application where you will:
 * Read the CSV file and store the data in memory(data don't need to be ordered). (The read of the file can be done on a separate thread)
 * After reading the file we should show the user 3 options in a menu and ask for a number where: 
 
-1. **Search by name:** It will ask the user to input a string and it will search by **School Name** and show on the screen the results(results should be sorted by name). Asking if the user wants to save the results on a **CSV** file where if yes ask the file name(you should store it in a directory called `output`), save it into a file and return to menu.
+1. **Search by name:** It will ask the user to input a string and it will search by **School Name** and show on the screen the results(results should be sorted by name). Asking if the user wants to save the results on a **CSV** file where if yes ask the file name(you should store it in a directory called `output`), save it into a file and return to the menu.
 
 2. **Search by DBN:** It will ask the user to input a string and it will search by **DBN** and show on the screen the result. The DBN is unique so you are allowed to create additional logic to optimize the search. After that return to the menu.
 
