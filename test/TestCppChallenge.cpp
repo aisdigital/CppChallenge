@@ -86,3 +86,17 @@ TEST(Parser, CSVFullResultToSchoolSatResult) {
   EXPECT_EQ(schoolSatResult.MathematicsMean,425);
   EXPECT_EQ(schoolSatResult.WritingMean,385);
 }
+
+TEST(Parser, ToSchoolSatResultList)
+{
+  std::vector<std::string> buffer = {"01M292,Henry Street School for International Studies ,31,391,425,385"};
+
+  const std::unordered_map<std::string,SchoolSatResult> schoolSatResultList = Parser::ToSchoolSatList(buffer);
+
+  EXPECT_EQ(schoolSatResultList.at("01M292").DBN,"01M292");
+  EXPECT_EQ(schoolSatResultList.at("01M292").SchoolName,"Henry Street School for International Studies ");
+  EXPECT_EQ(schoolSatResultList.at("01M292").TestTakesNumber,31);
+  EXPECT_EQ(schoolSatResultList.at("01M292").CriticalReadingMean,391);
+  EXPECT_EQ(schoolSatResultList.at("01M292").MathematicsMean,425);
+  EXPECT_EQ(schoolSatResultList.at("01M292").WritingMean,385);
+}

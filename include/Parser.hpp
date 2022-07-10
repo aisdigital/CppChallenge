@@ -4,6 +4,7 @@
 
 #include <sstream>
 #include <regex>
+#include <unordered_map>
 
 namespace Parser
 {
@@ -66,12 +67,25 @@ namespace Parser
         {
             schoolSatResult.DBN = filterResult[1];
             schoolSatResult.SchoolName = filterResult[2];
-            schoolSatResult.TestTakesNumber = std::stoi(filterResult[3]);
-            schoolSatResult.CriticalReadingMean = std::stoi(filterResult[4]);
-            schoolSatResult.MathematicsMean = std::stoi(filterResult[5]);
-            schoolSatResult.WritingMean = std::stoi(filterResult[6]);
+            schoolSatResult.TestTakesNumber = std::stoul(filterResult[3]);
+            schoolSatResult.CriticalReadingMean = std::stoul(filterResult[4]);
+            schoolSatResult.MathematicsMean = std::stoul(filterResult[5]);
+            schoolSatResult.WritingMean = std::stoul(filterResult[6]);
         }
 
         return schoolSatResult;
+    }
+
+    static std::unordered_map<std::string,SchoolSatResult> ToSchoolSatList(std::vector<std::string>& csvStringList)
+    {
+        std::unordered_map<std::string,SchoolSatResult> schoolSatResultList;
+
+        for(std::vector<std::string>::iterator it = std::begin(csvStringList); it != std::end(csvStringList); ++it)
+        {
+            SchoolSatResult schoolSatResult = ToSchoolSatResult(*it);
+            schoolSatResultList.insert(std::make_pair(schoolSatResult.DBN, schoolSatResult));
+        }
+
+        return schoolSatResultList;
     }
 };
