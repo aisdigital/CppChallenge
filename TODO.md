@@ -13,8 +13,12 @@ Challenge described at [README.md](README.md).
  * [ ] Create CSV Reader
    * [x] Create Function ReadCSV
    * [x] Create Tests using gtest
- * [ ] Create Parser from CSV line format to School Model
-   * [ ] Create Test using gtest
+ * [x] Create Parser from CSV line format to School Model
+   * [x] Create Test using gtest
+   * [x] Create ToString method
+ * [x] Create Parser from SchoolSatResult line format to CSV line
+   * [x] Create Test using gtest
+   * [x] Create ToSchoolSatResult method
  * [ ] Create Search by DBN method
  * [ ] Create UNIT Test for Search by DBN
  * [ ] Create Search by School Name Method

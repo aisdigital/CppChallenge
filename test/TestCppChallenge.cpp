@@ -26,19 +26,6 @@ TEST(SchoolSatResult, ModelInitialization) {
   EXPECT_EQ(schoolSatResult.MathematicsMean,0);
 }
 
-TEST(Parser, ToSchoolSatResult) {
-  const std::string csvString = "01M292,Henry Street School for International Studies ,31,391,425,385";
-
-  const SchoolSatResult schoolSatResult = Parser::ToSchoolSatResult(csvString);
-
-  EXPECT_EQ(schoolSatResult.DBN,"01M292");
-  EXPECT_EQ(schoolSatResult.SchoolName,"Henry Street School for International Studies ");
-  EXPECT_EQ(schoolSatResult.TestTakesNumber,31);
-  EXPECT_EQ(schoolSatResult.CriticalReadingMean,391);
-  EXPECT_EQ(schoolSatResult.MathematicsMean,425);
-  EXPECT_EQ(schoolSatResult.MathematicsMean,385);
-}
-
 TEST(Parser, CSVResultToString) {
   SchoolSatResult schoolSatResult;
 
@@ -85,4 +72,17 @@ TEST(Parser, CSVZeroGradesResultToString) {
   const std::string csvString = Parser::ToString(schoolSatResult);
 
   EXPECT_EQ(csvString,expectedCsvString);
+}
+
+TEST(Parser, CSVFullResultToSchoolSatResult) {
+  const std::string csvString = "01M292,Henry Street School for International Studies ,31,391,425,385";
+
+  const SchoolSatResult schoolSatResult = Parser::ToSchoolSatResult(csvString);
+
+  EXPECT_EQ(schoolSatResult.DBN,"01M292");
+  EXPECT_EQ(schoolSatResult.SchoolName,"Henry Street School for International Studies ");
+  EXPECT_EQ(schoolSatResult.TestTakesNumber,31);
+  EXPECT_EQ(schoolSatResult.CriticalReadingMean,391);
+  EXPECT_EQ(schoolSatResult.MathematicsMean,425);
+  EXPECT_EQ(schoolSatResult.WritingMean,385);
 }
