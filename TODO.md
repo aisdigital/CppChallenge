@@ -23,12 +23,15 @@ Challenge described at [README.md](README.md).
  * [ ] Create CSV File Writer
 
 ### Code Quality
+ * [ ] Add Doxygen to generate documentation
+   * [ ] Create Doxyfile
+   * [ ] Create CMake Custom Target `doc`
  * [ ] Create a lib
    * [ ] Split hpp into header + source
    * [ ] Change CMakeList files
- * [ ] Cmake Custom roles
-   * [ ] Add cmake-format linter
+ * [ ] Cmake Custom target `lint`
    * [ ] Add cppcheck linter
    * [ ] Add flawfinder linter
  * [ ] Add precommit to ensure calling linters before each commit
+   * [ ] Add cmake-format
  * [ ] Add gitaction to ensure testing inside github

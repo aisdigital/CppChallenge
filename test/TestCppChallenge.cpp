@@ -41,6 +41,7 @@ TEST(Parser, ToSchoolSatResult) {
 
 TEST(Parser, CSVResultToString) {
   SchoolSatResult schoolSatResult;
+
   schoolSatResult.DBN = "01M292";
   schoolSatResult.SchoolName = "Henry Street School for International Studies ";
   schoolSatResult.TestTakesNumber = 31;
@@ -57,6 +58,7 @@ TEST(Parser, CSVResultToString) {
 
 TEST(Parser, CSVEmptyResultToString) {
   SchoolSatResult schoolSatResult;
+
   schoolSatResult.DBN = "19K639";
   schoolSatResult.SchoolName = "Brooklyn Lab School ";
 
@@ -70,6 +72,7 @@ TEST(Parser, CSVEmptyResultToString) {
 
 TEST(Parser, CSVZeroGradesResultToString) {
   SchoolSatResult schoolSatResult;
+
   schoolSatResult.DBN = "19K639";
   schoolSatResult.SchoolName = "Brooklyn Lab School ";
   schoolSatResult.TestTakesNumber = 0;
