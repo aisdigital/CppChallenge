@@ -11,3 +11,5 @@ FILE(GLOB HEADERS include/*.h)
 FILE(GLOB SRC src/*.cpp)
 
 add_executable(CppChallenge src/main.cpp ${HEADERS} ${SRC})
+
+add_subdirectory(test)

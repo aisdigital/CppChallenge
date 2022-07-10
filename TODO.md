@@ -6,11 +6,13 @@ Challenge described at [README.md](README.md).
 
 ### Infra
  * [x] Install `C++` and `CMake`
- * [ ] Install `gtest`
+ * [x] Install `gtest`
 
 ### Challenge
  * [x] Create Class to represent each School Level Result
  * [ ] Create CSV Reader
+   * [x] Create Function ReadCSV
+   * [x] Create Tests using gtest
  * [ ] Create Parser from CSV line format to School Model
  * [ ] Create Search by DBN method
  * [ ] Create UNIT Test for Search by DBN
