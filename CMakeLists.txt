@@ -2,14 +2,17 @@ cmake_minimum_required(VERSION 2.8...3.22)
 
 project(CppChallenge)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(include)
 
-FILE(GLOB HEADERS include/*.h)
-FILE(GLOB SRC src/*.cpp)
+set(challenge_src
+    include/SchoolSatResult.h
+    include/Parser.hpp
+    include/FileUtils.hpp
+)
 
-add_executable(CppChallenge src/main.cpp ${HEADERS} ${SRC})
+add_executable(CppChallenge src/main.cpp ${challenge_src})
 
 add_subdirectory(test)

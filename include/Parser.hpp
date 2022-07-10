@@ -2,13 +2,22 @@
 
 #include "SchoolSatResult.h"
 
+#include <sstream>
+
 namespace Parser
 {
     static std::string ToString( const SchoolSatResult & schoolSatResult)
     {
-        const std::string csvString = "";
+        std::ostringstream ss;
+        
+        ss << schoolSatResult.DBN << ","
+           << schoolSatResult.SchoolName << ","
+           << schoolSatResult.TestTakesNumber << ","
+           << schoolSatResult.CriticalReadingMean << ","
+           << schoolSatResult.MathematicsMean << ","
+           << schoolSatResult.WritingMean;
 
-        return csvString;
+        return ss.str();
     }
 
     static SchoolSatResult ToSchoolSatResult( const std::string & csvString)
@@ -16,4 +25,4 @@ namespace Parser
         SchoolSatResult schoolSatResult;
         return schoolSatResult;
     }
-}
+};

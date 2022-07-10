@@ -13,8 +13,8 @@ class SchoolSatResult
 public:
     std::string DBN;
     std::string SchoolName;
-    uint16_t TestTakesNumber;
-    uint16_t CriticalReadingMean;
-    uint16_t MathematicsMean;
-    uint16_t WritingMean;
+    uint16_t TestTakesNumber = 0;
+    uint16_t CriticalReadingMean = 0;
+    uint16_t MathematicsMean = 0;
+    uint16_t WritingMean = 0;
 };

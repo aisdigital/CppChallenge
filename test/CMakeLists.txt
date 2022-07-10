@@ -14,9 +14,13 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-FILE(GLOB HEADERS include/*.hpp)
+set(challenge_src
+    ../include/SchoolSatResult.h
+    ../include/Parser.hpp
+    ../include/FileUtils.hpp
+)
 
-add_executable(TestCppChallenge TestCppChallenge.cpp ${HEADERS})
+add_executable(TestCppChallenge TestCppChallenge.cpp ${challenge_src}) 
 
 target_link_libraries( TestCppChallenge  gtest_main )
 

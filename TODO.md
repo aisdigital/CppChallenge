@@ -14,6 +14,7 @@ Challenge described at [README.md](README.md).
    * [x] Create Function ReadCSV
    * [x] Create Tests using gtest
  * [ ] Create Parser from CSV line format to School Model
+   * [ ] Create Test using gtest
  * [ ] Create Search by DBN method
  * [ ] Create UNIT Test for Search by DBN
  * [ ] Create Search by School Name Method
@@ -22,6 +23,9 @@ Challenge described at [README.md](README.md).
  * [ ] Create CSV File Writer
 
 ### Code Quality
+ * [ ] Create a lib
+   * [ ] Split hpp into header + source
+   * [ ] Change CMakeList files
  * [ ] Cmake Custom roles
    * [ ] Add cmake-format linter
    * [ ] Add cppcheck linter
