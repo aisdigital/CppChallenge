@@ -14,9 +14,11 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(TestFileUtils TestFileUtils.cpp ../include/FileUtils.hpp)
+FILE(GLOB HEADERS include/*.hpp)
 
-target_link_libraries( TestFileUtils  gtest_main )
+add_executable(TestCppChallenge TestCppChallenge.cpp ${HEADERS})
+
+target_link_libraries( TestCppChallenge  gtest_main )
 
 include(GoogleTest)
-gtest_discover_tests(TestFileUtils)
+gtest_discover_tests(TestCppChallenge)
