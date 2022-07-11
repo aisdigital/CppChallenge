@@ -18,11 +18,14 @@ set(challenge_src
     ../include/SchoolSatResult.h
     ../include/Parser.hpp
     ../include/FileUtils.hpp
+    ../include/Database.hpp
 )
 
-add_executable(TestCppChallenge TestCppChallenge.cpp ${challenge_src}) 
+add_executable(TestCppChallenge TestCppChallenge.cpp ${challenge_src})
+add_executable(TestDatabase TestDatabase.cpp ${challenge_src})
 
 target_link_libraries( TestCppChallenge  gtest_main )
+target_link_libraries( TestDatabase  gtest_main )
 
 include(GoogleTest)
-gtest_discover_tests(TestCppChallenge)
+gtest_discover_tests(TestCppChallenge TestDatabase)

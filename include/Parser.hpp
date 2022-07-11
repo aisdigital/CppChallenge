@@ -51,12 +51,18 @@ static std::string ToString(const SchoolSatResult &schoolSatResult) {
  */
 static SchoolSatResult ToSchoolSatResult(const std::string &csvString) {
   const std::regex schoolSatResultRegex(
-      "([0-9A-Z]*),([a-zA-Z0-9 ]*),([0-9]*),([0-9]*),([0-9]*),([0-9]*)");
+      "([0-9A-Z]*),([^,\"]*),([0-9]*),([0-9]*),([0-9]*),([0-9]*)");
+
+  const std::regex schoolSatResultWithCommaRegex(
+      "([0-9A-Z]*),\"([^\"]*)\",([0-9]*),([0-9]*),([0-9]*),([0-9]*)");
+
   std::smatch filterResult;
 
   SchoolSatResult schoolSatResult;
 
-  if (std::regex_search(csvString, filterResult, schoolSatResultRegex)) {
+  if (std::regex_search(csvString, filterResult, schoolSatResultRegex) ||
+      std::regex_search(csvString, filterResult,
+                        schoolSatResultWithCommaRegex)) {
     schoolSatResult.DBN = filterResult[1];
     schoolSatResult.SchoolName = filterResult[2];
 
