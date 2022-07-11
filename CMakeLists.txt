@@ -11,6 +11,8 @@ set(challenge_src
     include/SchoolSatResult.h
     include/Parser.hpp
     include/FileUtils.hpp
+    include/Database.hpp
+    include/CLI.hpp
 )
 
 add_executable(CppChallenge src/main.cpp ${challenge_src})

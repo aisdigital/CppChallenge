@@ -24,8 +24,10 @@ Challenge described at [README.md](README.md).
    * [x] Create UNIT Test for Search by DBN
  * [x] Create Search by School Name Method
    * [x] Create UNIT Test for Search by School
- * [ ] Create CLI interface
+ * [x] Create CLI interface
+   * [x] Create basic CLI inside main
  * [ ] Create CSV File Writer
+   * [ ] Add option to export to file
 
 ### Code Quality
  * [ ] Add Doxygen to generate documentation
