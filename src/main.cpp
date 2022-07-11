@@ -28,6 +28,24 @@ int main(int argc, const char *argv[]) {
         std::cout << "Unable to find school '" << schoolName << "'"
                   << std::endl;
       } else {
+        const std::string userInputWriteToFile =
+            CLI::ReadUserInput("Write Output to a file? (y,[n])");
+
+        if (userInputWriteToFile == "y") {
+          const std::string filename =
+              "output/" + CLI::ReadUserInput("Type File Name");
+
+          const std::string header =
+              "DBN,School Name,Number of Test Takers,Critical Reading "
+              "Mean,Mathematics Mean,Writing Mean";
+
+          std::vector<std::string> buffer = {Parser::ToString(schoolSatResult)};
+
+          FileUtils::WriteCSV(filename, header, buffer);
+        } else {
+          CLI::Draw(schoolSatResult);
+        }
+
         CLI::Draw(schoolSatResult);
       }
     } else if (menuOption == "2") {

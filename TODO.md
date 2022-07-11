@@ -10,7 +10,7 @@ Challenge described at [README.md](README.md).
 
 ### Challenge
  * [x] Create Class to represent each School Level Result
- * [ ] Create CSV Reader
+ * [x] Create CSV Reader
    * [x] Create Function ReadCSV
    * [x] Create Tests using gtest
  * [x] Create Parser from CSV line format to School Model
@@ -26,8 +26,13 @@ Challenge described at [README.md](README.md).
    * [x] Create UNIT Test for Search by School
  * [x] Create CLI interface
    * [x] Create basic CLI inside main
- * [ ] Create CSV File Writer
-   * [ ] Add option to export to file
+ * [x] Create CSV File Writer
+   * [x] Create FileUtils::WriterCSV
+   * [x] Add option to export to file inside CLI
+ * [ ] Change Search by School to return list with similar School's Names
+   * [ ] Change method `Database::FindBySchoolName`
+   * [ ] Add `CLI::Draw` method for list
+   * [ ] Change `main.cpp`
 
 ### Code Quality
  * [ ] Add Doxygen to generate documentation
