@@ -35,8 +35,9 @@ Challenge described at [README.md](README.md).
    * [ ] Split hpp into header + source
    * [ ] Change CMakeList files
  * [ ] Cmake Custom target `lint`
-   * [ ] Add cppcheck linter
+ * [x] Add precommit to ensure calling linters before each commit
+   * [x] Add cppcheck linter
+   * [x] Add clang-format
    * [ ] Add flawfinder linter
- * [ ] Add precommit to ensure calling linters before each commit
-   * [ ] Add cmake-format
  * [ ] Add gitaction to ensure testing inside github
+ 
