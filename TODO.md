@@ -20,8 +20,8 @@ Challenge described at [README.md](README.md).
    * [x] Create Test using gtest
    * [x] Create ToSchoolSatResult method
  * [x] Create Parser from string list to SchoolSatResult hash list
- * [ ] Create Search by DBN method
- * [ ] Create UNIT Test for Search by DBN
+ * [x] Create Search by DBN method
+   * [x] Create UNIT Test for Search by DBN
  * [ ] Create Search by School Name Method
  * [ ] Create UNIT Test for Search by School
  * [ ] Create CLI interface

@@ -63,14 +63,25 @@ namespace Parser
 
         SchoolSatResult schoolSatResult;
 
-        if( std::regex_search( csvString, filterResult, schoolSatResultRegex ))
+        if( std::regex_search( csvString, filterResult, schoolSatResultRegex ) )
         {
             schoolSatResult.DBN = filterResult[1];
             schoolSatResult.SchoolName = filterResult[2];
-            schoolSatResult.TestTakesNumber = std::stoul(filterResult[3]);
-            schoolSatResult.CriticalReadingMean = std::stoul(filterResult[4]);
-            schoolSatResult.MathematicsMean = std::stoul(filterResult[5]);
-            schoolSatResult.WritingMean = std::stoul(filterResult[6]);
+
+            try
+            {
+                schoolSatResult.TestTakesNumber = std::stoul(filterResult[3]);
+                schoolSatResult.CriticalReadingMean = std::stoul(filterResult[4]);
+                schoolSatResult.MathematicsMean = std::stoul(filterResult[5]);
+                schoolSatResult.WritingMean = std::stoul(filterResult[6]);
+            }
+            catch(...)
+            {
+                schoolSatResult.TestTakesNumber = 0;
+                schoolSatResult.CriticalReadingMean = 0;
+                schoolSatResult.MathematicsMean = 0;
+                schoolSatResult.WritingMean = 0;
+            }
         }
 
         return schoolSatResult;
