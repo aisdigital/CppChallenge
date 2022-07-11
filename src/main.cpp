@@ -1,8 +1,9 @@
 // Challenge C++ AISDigital
 
+#include <iostream>
+
 #include "FileUtils.hpp"
 #include "SchoolSatResult.h"
-#include <iostream>
 
 int main(int argc, const char *argv[]) {
   const std::string inputfile =

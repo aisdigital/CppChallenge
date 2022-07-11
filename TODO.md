@@ -22,8 +22,8 @@ Challenge described at [README.md](README.md).
  * [x] Create Parser from string list to SchoolSatResult hash list
  * [x] Create Search by DBN method
    * [x] Create UNIT Test for Search by DBN
- * [ ] Create Search by School Name Method
- * [ ] Create UNIT Test for Search by School
+ * [x] Create Search by School Name Method
+   * [x] Create UNIT Test for Search by School
  * [ ] Create CLI interface
  * [ ] Create CSV File Writer
 
@@ -40,4 +40,3 @@ Challenge described at [README.md](README.md).
    * [x] Add clang-format
    * [ ] Add flawfinder linter
  * [ ] Add gitaction to ensure testing inside github
- 

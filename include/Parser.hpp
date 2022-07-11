@@ -1,10 +1,10 @@
 #pragma once
 
-#include "SchoolSatResult.h"
-
 #include <regex>
 #include <sstream>
 #include <unordered_map>
+
+#include "SchoolSatResult.h"
 
 namespace Parser {
 /**

@@ -1,11 +1,10 @@
+#include <gtest/gtest.h>
+
 #include "Database.hpp"
 #include "FileUtils.hpp"
 #include "Parser.hpp"
 
-#include <gtest/gtest.h>
-
 TEST(FileUtils, ReadCSV) {
-
   const std::string inputfile =
       "input/SAT__College_Board__2010_School_Level_Results.csv";
   const std::string fileHeader =
@@ -135,6 +134,25 @@ TEST(Database, FindByDBN) {
   database.Read(inputfile);
 
   auto schoolSatResult = database.FindByDBN("01M292");
+
+  EXPECT_EQ(schoolSatResult.DBN, "01M292");
+  EXPECT_EQ(schoolSatResult.SchoolName,
+            "Henry Street School for International Studies ");
+  EXPECT_EQ(schoolSatResult.TestTakesNumber, 31);
+  EXPECT_EQ(schoolSatResult.CriticalReadingMean, 391);
+  EXPECT_EQ(schoolSatResult.MathematicsMean, 425);
+  EXPECT_EQ(schoolSatResult.WritingMean, 385);
+}
+
+TEST(Database, FindBySchoolName) {
+  const std::string inputfile =
+      "input/SAT__College_Board__2010_School_Level_Results.csv";
+
+  Database database;
+  database.Read(inputfile);
+
+  auto schoolSatResult = database.FindBySchoolName(
+      "Henry Street School for International Studies ");
 
   EXPECT_EQ(schoolSatResult.DBN, "01M292");
   EXPECT_EQ(schoolSatResult.SchoolName,

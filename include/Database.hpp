@@ -3,6 +3,8 @@
 #include "Parser.hpp"
 #include "SchoolSatResult.h"
 
+#include <algorithm>
+
 class Database {
 public:
   void Read(const std::string &filename) {
@@ -15,9 +17,21 @@ public:
   }
 
   SchoolSatResult FindBySchoolName(const std::string &schoolName) {
-    SchoolSatResult schoolSatResult;
+    auto is_sameSchoolName =
+        [&schoolName](const std::pair<std::string, SchoolSatResult> &item) {
+          return (item.second.SchoolName == schoolName);
+        };
 
-    return schoolSatResult;
+    auto result =
+        std::find_if(std::begin(schoolSatResultData),
+                     std::end(schoolSatResultData), is_sameSchoolName);
+
+    if (result != std::end(schoolSatResultData)) {
+      return result->second;
+    }
+
+    SchoolSatResult schoolSatResultFound;
+    return schoolSatResultFound;
   }
 
 private:
