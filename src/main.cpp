@@ -21,13 +21,14 @@ int main(int argc, const char *argv[]) {
 
     if (menuOption == "1") {
       const std::string schoolName = CLI::ReadUserInput("Type School Name");
-      const SchoolSatResult schoolSatResult =
+      const auto schoolSatResultList =
           schoolSatResultsDB.FindBySchoolName(schoolName);
 
-      if (schoolSatResult.SchoolName != schoolName) {
-        std::cout << "Unable to find school '" << schoolName << "'"
-                  << std::endl;
+      if (schoolSatResultList.empty()) {
+        CLI::DrawAlertMsg("Unable to find school '" + schoolName + "'");
       } else {
+        CLI::Draw(schoolSatResultList);
+
         const std::string userInputWriteToFile =
             CLI::ReadUserInput("Write Output to a file? (y,[n])");
 
@@ -35,34 +36,25 @@ int main(int argc, const char *argv[]) {
           const std::string filename =
               "output/" + CLI::ReadUserInput("Type File Name");
 
-          const std::string header =
-              "DBN,School Name,Number of Test Takers,Critical Reading "
-              "Mean,Mathematics Mean,Writing Mean";
+          const std::string buffer = Parser::ToCSVString(schoolSatResultList);
+          FileUtils::Write(filename, buffer);
 
-          std::vector<std::string> buffer = {Parser::ToString(schoolSatResult)};
-
-          FileUtils::WriteCSV(filename, header, buffer);
-        } else {
-          CLI::Draw(schoolSatResult);
+          CLI::DrawAlertMsg("Output exported to " + filename);
         }
-
-        CLI::Draw(schoolSatResult);
       }
     } else if (menuOption == "2") {
       const std::string dbn = CLI::ReadUserInput("Type DBN");
       const SchoolSatResult schoolSatResult = schoolSatResultsDB.FindByDBN(dbn);
 
       if (schoolSatResult.DBN != dbn) {
-        std::cout << "Unable to find school with DBN: '" << dbn << "'"
-                  << std::endl;
+        CLI::DrawAlertMsg("Unable to find school with DBN: '" + dbn + "'");
       } else {
         CLI::Draw(schoolSatResult);
       }
     } else if (menuOption == "q") {
-      std::cout << ">> Exiting..." << std::endl;
+      CLI::DrawAlertMsg("Exiting...");
     } else {
-      std::cout << ">> Error! Invalid menu option '" << menuOption << "'"
-                << std::endl;
+      CLI::DrawAlertMsg("Error! Invalid menu option '" + menuOption + "'");
     }
   } while (menuOption != "q");
 

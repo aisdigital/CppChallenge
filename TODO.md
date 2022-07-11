@@ -29,10 +29,10 @@ Challenge described at [README.md](README.md).
  * [x] Create CSV File Writer
    * [x] Create FileUtils::WriterCSV
    * [x] Add option to export to file inside CLI
- * [ ] Change Search by School to return list with similar School's Names
-   * [ ] Change method `Database::FindBySchoolName`
-   * [ ] Add `CLI::Draw` method for list
-   * [ ] Change `main.cpp`
+ * [x] Change Search by School to return list with similar School's Names
+   * [x] Change method `Database::FindBySchoolName`
+   * [x] Add `CLI::Draw` method for list
+   * [x] Change `main.cpp`
 
 ### Code Quality
  * [ ] Add Doxygen to generate documentation

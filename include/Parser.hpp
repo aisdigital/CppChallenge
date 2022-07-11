@@ -89,4 +89,20 @@ ToSchoolSatList(std::vector<std::string> &csvStringList) {
 
   return schoolSatResultList;
 }
+
+static std::string
+ToCSVString(const std::vector<SchoolSatResult> &schoolSatResultList) {
+  std::ostringstream ss;
+  ss << "DBN,School Name,Number of Test Takers,Critical Reading "
+        "Mean,Mathematics Mean,Writing Mean\n";
+
+  std::for_each(std::begin(schoolSatResultList), std::end(schoolSatResultList),
+                [&ss](const SchoolSatResult &schoolSatResult) {
+                  ss << Parser::ToString(schoolSatResult) << '\n';
+                });
+
+  ss << std::endl;
+
+  return ss.str();
+}
 }; // namespace Parser

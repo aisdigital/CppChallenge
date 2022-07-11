@@ -8,7 +8,7 @@
 class Database {
 public:
   void Read(const std::string &filename) {
-    std::vector<std::string> buffer = FileUtils::ReadCSV(filename);
+    std::vector<std::string> buffer = FileUtils::Read(filename);
     schoolSatResultData = Parser::ToSchoolSatList(buffer);
   }
 
@@ -16,22 +16,29 @@ public:
     return schoolSatResultData.at(DBN);
   }
 
-  SchoolSatResult FindBySchoolName(const std::string &schoolName) {
-    auto is_sameSchoolName =
-        [&schoolName](const std::pair<std::string, SchoolSatResult> &item) {
-          return (item.second.SchoolName == schoolName);
+  std::vector<SchoolSatResult> FindBySchoolName(const std::string &schoolName) {
+    std::vector<SchoolSatResult> searchResultList;
+
+    auto addIfSimilarSchoolName =
+        [&schoolName, &searchResultList](
+            const std::pair<std::string, SchoolSatResult> &item) {
+          if (item.second.SchoolName.find(schoolName) != std::string::npos) {
+            searchResultList.push_back(item.second);
+          }
         };
 
-    auto result =
-        std::find_if(std::begin(schoolSatResultData),
-                     std::end(schoolSatResultData), is_sameSchoolName);
+    std::for_each(std::begin(schoolSatResultData),
+                  std::end(schoolSatResultData), addIfSimilarSchoolName);
 
-    if (result != std::end(schoolSatResultData)) {
-      return result->second;
-    }
+    auto isSchoolNameOrdered = [](const SchoolSatResult &schoolA,
+                                  const SchoolSatResult &schoolB) -> bool {
+      return (schoolA.SchoolName < schoolB.SchoolName);
+    };
 
-    SchoolSatResult schoolSatResultFound;
-    return schoolSatResultFound;
+    std::sort(std::begin(searchResultList), std::end(searchResultList),
+              isSchoolNameOrdered);
+
+    return searchResultList;
   }
 
 private:

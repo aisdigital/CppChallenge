@@ -5,7 +5,7 @@
 #include <vector>
 
 namespace FileUtils {
-std::vector<std::string> ReadCSV(const std::string &filename) {
+std::vector<std::string> Read(const std::string &filename) {
   std::vector<std::string> buffer;
 
   std::ifstream inputFile;
@@ -24,20 +24,12 @@ std::vector<std::string> ReadCSV(const std::string &filename) {
   return buffer;
 }
 
-void WriteCSV(const std::string &filename, const std::string &header,
-              std::vector<std::string> &buffer) {
+void Write(const std::string &filename, const std::string &buffer) {
   std::ofstream outputFile;
 
   outputFile.open(filename.c_str());
 
-  outputFile << header << std::endl;
-
-  for (std::vector<std::string>::iterator it = std::begin(buffer);
-       it != std::end(buffer); ++it) {
-    outputFile << *it << '\n';
-  }
-
-  outputFile << std::endl;
+  outputFile << buffer << std::endl;
 
   outputFile.close();
 }

@@ -1,6 +1,7 @@
 
 #include "Parser.hpp"
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 
@@ -16,9 +17,13 @@ public:
   }
 
   static void Draw(const SchoolSatResult &schoolSatResult) {
-    std::cout << "DBN,School Name,Number of Test Takers,Critical Reading "
-                 "Mean,Mathematics Mean,Writing Mean\n";
-    std::cout << Parser::ToString(schoolSatResult) << std::endl;
+    std::cout << "\nDBN,School Name,Number of Test Takers,Critical Reading "
+                 "Mean,Mathematics Mean,Writing Mean\n"
+              << Parser::ToString(schoolSatResult) << std::endl;
+  }
+
+  static void Draw(const std::vector<SchoolSatResult> &schoolSatResultList) {
+    std::cout << Parser::ToCSVString(schoolSatResultList) << std::endl;
   }
 
   static std::string ReadUserInput(const std::string &helperMsg) {
@@ -27,5 +32,9 @@ public:
     std::cin >> userInput;
 
     return userInput;
+  }
+
+  static void DrawAlertMsg(const std::string &message) {
+    std::cout << ">> " << message << std::endl;
   }
 };
