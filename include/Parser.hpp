@@ -50,19 +50,18 @@ static std::string ToString(const SchoolSatResult &schoolSatResult) {
  * "{DBN},{SchoolName},{TestTakersNumber},{CriticalReadingMean},{MathematicsMean},{WritingMean}"
  */
 static SchoolSatResult ToSchoolSatResult(const std::string &csvString) {
-  const std::regex schoolSatResultRegex(
+  const std::regex defaultFormatRegex(
       "([0-9A-Z]*),([^,\"]*),([0-9]*),([0-9]*),([0-9]*),([0-9]*)");
 
-  const std::regex schoolSatResultWithCommaRegex(
+  const std::regex schooNameWithCommaRegex(
       "([0-9A-Z]*),\"([^\"]*)\",([0-9]*),([0-9]*),([0-9]*),([0-9]*)");
 
   std::smatch filterResult;
 
   SchoolSatResult schoolSatResult;
 
-  if (std::regex_search(csvString, filterResult, schoolSatResultRegex) ||
-      std::regex_search(csvString, filterResult,
-                        schoolSatResultWithCommaRegex)) {
+  if (std::regex_search(csvString, filterResult, defaultFormatRegex) ||
+      std::regex_search(csvString, filterResult, schooNameWithCommaRegex)) {
     schoolSatResult.DBN = filterResult[1];
     schoolSatResult.SchoolName = filterResult[2];
 
@@ -99,8 +98,8 @@ ToSchoolSatList(std::vector<std::string> &csvStringList) {
 static std::string
 ToCSVString(const std::vector<SchoolSatResult> &schoolSatResultList) {
   std::ostringstream ss;
-  ss << "DBN,School Name,Number of Test Takers,Critical Reading "
-        "Mean,Mathematics Mean,Writing Mean\n";
+  ss << "DBN,School Name,Number of Test Takers,Critical Reading Mean,"
+        "Mathematics Mean,Writing Mean\n";
 
   std::for_each(std::begin(schoolSatResultList), std::end(schoolSatResultList),
                 [&ss](const SchoolSatResult &schoolSatResult) {

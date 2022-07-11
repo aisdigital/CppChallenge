@@ -44,12 +44,12 @@ int main(int argc, const char *argv[]) {
       }
     } else if (menuOption == "2") {
       const std::string dbn = CLI::ReadUserInput("Type DBN");
-      const SchoolSatResult schoolSatResult = schoolSatResultsDB.FindByDBN(dbn);
+      const auto schoolSatResultList = schoolSatResultsDB.FindByDBN(dbn);
 
-      if (schoolSatResult.DBN != dbn) {
+      if (schoolSatResultList.empty()) {
         CLI::DrawAlertMsg("Unable to find school with DBN: '" + dbn + "'");
       } else {
-        CLI::Draw(schoolSatResult);
+        CLI::Draw(schoolSatResultList[0]);
       }
     } else if (menuOption == "q") {
       CLI::DrawAlertMsg("Exiting...");

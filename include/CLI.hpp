@@ -17,9 +17,7 @@ public:
   }
 
   static void Draw(const SchoolSatResult &schoolSatResult) {
-    std::cout << "\nDBN,School Name,Number of Test Takers,Critical Reading "
-                 "Mean,Mathematics Mean,Writing Mean\n"
-              << Parser::ToString(schoolSatResult) << std::endl;
+    std::cout << Parser::ToCSVString({schoolSatResult}) << std::endl;
   }
 
   static void Draw(const std::vector<SchoolSatResult> &schoolSatResultList) {

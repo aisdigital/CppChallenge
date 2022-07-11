@@ -45,5 +45,4 @@ Challenge described at [README.md](README.md).
  * [x] Add precommit to ensure calling linters before each commit
    * [x] Add cppcheck linter
    * [x] Add clang-format
-   * [ ] Add flawfinder linter
  * [ ] Add gitaction to ensure testing inside github

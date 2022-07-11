@@ -27,15 +27,15 @@ TEST(Database, FindByDBN) {
   Database database;
   database.Read(inputfile);
 
-  auto schoolSatResult = database.FindByDBN("01M292");
+  const auto schoolSatResultList = database.FindByDBN("01M292");
 
-  EXPECT_EQ(schoolSatResult.DBN, "01M292");
-  EXPECT_EQ(schoolSatResult.SchoolName,
+  EXPECT_EQ(schoolSatResultList[0].DBN, "01M292");
+  EXPECT_EQ(schoolSatResultList[0].SchoolName,
             "Henry Street School for International Studies ");
-  EXPECT_EQ(schoolSatResult.TestTakesNumber, 31);
-  EXPECT_EQ(schoolSatResult.CriticalReadingMean, 391);
-  EXPECT_EQ(schoolSatResult.MathematicsMean, 425);
-  EXPECT_EQ(schoolSatResult.WritingMean, 385);
+  EXPECT_EQ(schoolSatResultList[0].TestTakesNumber, 31);
+  EXPECT_EQ(schoolSatResultList[0].CriticalReadingMean, 391);
+  EXPECT_EQ(schoolSatResultList[0].MathematicsMean, 425);
+  EXPECT_EQ(schoolSatResultList[0].WritingMean, 385);
 }
 
 TEST(Database, ExactSearchFindBySchoolName) {
@@ -45,7 +45,7 @@ TEST(Database, ExactSearchFindBySchoolName) {
   Database database;
   database.Read(inputfile);
 
-  auto schoolSatResultList = database.FindBySchoolName(
+  const auto schoolSatResultList = database.FindBySchoolName(
       "Henry Street School for International Studies ");
 
   ASSERT_FALSE(schoolSatResultList.empty());
@@ -66,7 +66,7 @@ TEST(Database, SimilarTermSearchFindBySchoolName) {
   Database database;
   database.Read(inputfile);
 
-  auto schoolSatResultList = database.FindBySchoolName("Henry Street");
+  const auto schoolSatResultList = database.FindBySchoolName("Henry Street");
 
   ASSERT_FALSE(schoolSatResultList.empty());
 
@@ -86,7 +86,19 @@ TEST(Database, UnableToFindBySchoolName) {
   Database database;
   database.Read(inputfile);
 
-  auto schoolSatResultList = database.FindBySchoolName("ZZZZZZZZZZZ");
+  const auto schoolSatResultList = database.FindBySchoolName("ZZZZZZZZZZZ");
+
+  EXPECT_TRUE(schoolSatResultList.empty());
+}
+
+TEST(Database, UnableToFindByDBN) {
+  const std::string inputfile =
+      "input/SAT__College_Board__2010_School_Level_Results.csv";
+
+  Database database;
+  database.Read(inputfile);
+
+  const auto schoolSatResultList = database.FindByDBN("ZZZZZZZZZZZ");
 
   EXPECT_TRUE(schoolSatResultList.empty());
 }

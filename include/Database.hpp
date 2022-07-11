@@ -12,8 +12,12 @@ public:
     schoolSatResultData = Parser::ToSchoolSatList(buffer);
   }
 
-  SchoolSatResult FindByDBN(const std::string &DBN) {
-    return schoolSatResultData.at(DBN);
+  std::vector<SchoolSatResult> FindByDBN(const std::string &DBN) {
+    if (schoolSatResultData.find(DBN) != std::end(schoolSatResultData)) {
+      return {schoolSatResultData.at(DBN)};
+    }
+
+    return {};
   }
 
   std::vector<SchoolSatResult> FindBySchoolName(const std::string &schoolName) {
