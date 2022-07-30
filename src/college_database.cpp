@@ -10,3 +10,7 @@
  */
 
 #include "college_database.h"
+
+bool CollegeDatabase::load(const CSVFile& file){
+    return true;
+}

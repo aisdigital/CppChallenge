@@ -16,12 +16,13 @@
 #include <vector>
 
 #include "college.h"
+#include "csv_file.h"
 
 class CollegeDatabase {
     public:
 
     CollegeDatabase() = default;
-    void load(const std::string& path);
+    bool load(const CSVFile& file);
 
     private:
 
