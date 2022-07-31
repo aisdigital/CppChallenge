@@ -30,6 +30,7 @@ void CollegeDatabase::insert(const College& college){
 
 std::ostringstream CollegeDatabase::select(const CollegeDatabaseColumns& column, const std::string& value){
     std::ostringstream stream;
+    stream << COLLEGE_DATABASE_HEADER << std::endl;
     
     if(column == CollegeDatabaseColumns::DBN){
         College college;

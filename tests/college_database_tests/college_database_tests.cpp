@@ -22,7 +22,6 @@ TEST(CollegeDatabaseTests, insert){
     database.insert(college2);
     database.insert(college3);
 
-
     std::string ret = database.select(CollegeDatabaseColumns::SchoolName, "").str();
     std::cout << ret << std::endl;
     EXPECT_FALSE(ret.empty());

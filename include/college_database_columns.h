@@ -9,6 +9,9 @@
  * 
  */
 
+#ifndef COLLEGE_DATABASE_COLUMNS_H
+#define COLLEGE_DATABASE_COLUMNS_H
+
 enum CollegeDatabaseColumns {
     DBN = 0,
     SchoolName,
@@ -18,3 +21,5 @@ enum CollegeDatabaseColumns {
     WritingMean,
     Size
 };
+
+#endif

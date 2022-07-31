@@ -20,6 +20,8 @@
 #include "csv_file.h"
 #include "college_database_columns.h"
 
+#define COLLEGE_DATABASE_HEADER "DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean"
+
 class CollegeDatabase {
     public:
 
