@@ -1,6 +1,6 @@
 /**
  * @file csv_file.cpp
- * @author your name (you@domain.com)
+ * @author Mariana Leite
  * @brief 
  * @version 0.1
  * @date 2022-07-30
@@ -55,15 +55,14 @@ void CSVFile::loadLine(const std::string& line){
     size_t start, end, index = 0;
 
     while(index < line.size()){
-        if(line[index] == COMMA) {
+        if(line[index] == COMMA){
             start = index + 1;
-            if(line[start] == QUOTE){
-                end = line.find(QUOTE, start + 1);
-            } else {
-                end = line.find(COMMA, index + 1) - 1;
-            }
         } else {
             start = index;
+        }
+        if(line[start] == QUOTE){
+            end = line.find(QUOTE, start + 1);
+        } else {
             end = line.find(COMMA, index + 1) - 1;
         }
         std::string cell = line.substr(start, end - start + 1);

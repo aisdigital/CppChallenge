@@ -1,6 +1,6 @@
 /**
  * @file csv_file.h
- * @author your name (you@domain.com)
+ * @author Mariana Leite
  * @brief 
  * @version 0.1
  * @date 2022-07-30
@@ -20,10 +20,6 @@
 #define QUOTE '"'
 #define COMMA ','
 
-/**
- * @brief 
- * 
- */
 class CSVFile {
     public:
 
