@@ -14,17 +14,24 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "college.h"
 #include "csv_file.h"
+#include "college_database_columns.h"
 
 class CollegeDatabase {
     public:
 
     CollegeDatabase() = default;
-    bool load(const CSVFile& file);
+    bool load(CSVFile& file);
+    std::ostringstream select(const CollegeDatabaseColumns& column, const std::string& value);
 
     private:
+
+    bool searchByDBN(College& college, const std::string& dbn);
+    bool searchBySchoolName(std::vector<College>& colleges, const std::string& name);
+    void loadCollege(const std::vector<std::string>& data);
 
     std::vector<College> m_database;
 };

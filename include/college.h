@@ -1,6 +1,6 @@
 /**
  * @file college.h
- * @author your name (you@domain.com)
+ * @author Mariana Leite
  * @brief 
  * @version 0.1
  * @date 2022-07-27
@@ -13,6 +13,7 @@
 #define COLLEGE_H
 
 #include <string>
+#include <sstream>
 
 class College {
     public:
@@ -25,6 +26,7 @@ class College {
     std::string writing_mean;
 
     bool operator<(const College& college);
+    friend std::ostream& operator<<(std::ostream& os, const College& college);
 };
 
 #endif
