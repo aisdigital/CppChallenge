@@ -25,6 +25,7 @@ class CollegeDatabase {
 
     CollegeDatabase() = default;
     bool load(CSVFile& file);
+    void insert(const College& college);
     std::ostringstream select(const CollegeDatabaseColumns& column, const std::string& value);
 
     private:

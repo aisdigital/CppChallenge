@@ -14,12 +14,18 @@
 bool CollegeDatabase::load(CSVFile& file){
     if(file.cols() == CollegeDatabaseColumns::Size){
         m_database.clear();
-        for(auto& row : file.data()){
+        auto data = file.data();
+        std::for_each(data.begin()+1, data.end(), [&](const std::vector<std::string>& row){
             loadCollege(row);
-        }
+        });
         return true;
     }
     return false;
+}
+
+void CollegeDatabase::insert(const College& college){
+    auto it = std::lower_bound(m_database.begin(), m_database.end(), college);
+    m_database.insert(it, college);
 }
 
 std::ostringstream CollegeDatabase::select(const CollegeDatabaseColumns& column, const std::string& value){
@@ -73,6 +79,5 @@ void CollegeDatabase::loadCollege(const std::vector<std::string>& data){
     College college = {
         data[0], data[1], data[2], data[3], data[4], data[5]
     };
-    auto it = std::lower_bound(m_database.begin(), m_database.end(), college);
-    m_database.insert(it, college);
+    insert(college);
 }

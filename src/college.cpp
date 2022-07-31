@@ -17,5 +17,6 @@ bool College::operator<(const College& college){
 
 std::ostream& operator<<(std::ostream& os, const College& college){
     os << college.dbn << "," << college.name << "," << college.test_takers << "," << 
-        college.reading_mean << "," << college.math_mean << "," << college.writing_mean; 
+        college.reading_mean << "," << college.math_mean << "," << college.writing_mean;
+    return os;
 }
