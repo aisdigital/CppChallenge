@@ -1,4 +1,13 @@
-// Challenge C++ AISDigital
+/**
+ * @file main.cpp
+ * @author Mariana Leite
+ * @brief 
+ * @version 0.1
+ * @date 2022-07-31
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include <iostream>
 
@@ -6,8 +15,8 @@
 #include "college_database.h"
 
 int main(int argc, const char * argv[]) { 
+
 	CSVFile file("input/SAT__College_Board__2010_School_Level_Results.csv");
-  
 	CollegeDatabase database;
 	database.load(file);
 
@@ -32,6 +41,6 @@ int main(int argc, const char * argv[]) {
 			break;
 		}
 	}
-  
+
 	return 0;
 }

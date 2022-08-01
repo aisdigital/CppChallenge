@@ -23,8 +23,7 @@ TEST(CollegeDatabaseTests, insert){
     database.insert(college3);
 
     std::string ret = database.select(CollegeDatabaseColumns::SchoolName, "").str();
-    std::cout << ret << std::endl;
-    EXPECT_FALSE(ret.empty());
+    EXPECT_EQ("DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n2,College,,,,\n1,Institute,2,,10,5\n3,School,1,2,3,4\n", ret);
 }
 
 TEST(CollegeDatabaseTests, loadSuccess){
@@ -48,12 +47,10 @@ TEST(CollegeDatabaseTests, selectDBN){
     ASSERT_TRUE(database.load(file));
 
     std::string ret = database.select(CollegeDatabaseColumns::DBN, "2").str();
-    std::cout << ret << std::endl;
-    EXPECT_FALSE(ret.empty());
+    EXPECT_EQ("DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n2,College,,,,\n", ret);
 
     ret = database.select(CollegeDatabaseColumns::DBN, "5").str();
-    std::cout << ret << std::endl;
-    EXPECT_TRUE(ret.empty());
+    EXPECT_EQ("DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n", ret);
 }
 
 TEST(CollegeDatabaseTests, selectSchoolName){
@@ -63,12 +60,10 @@ TEST(CollegeDatabaseTests, selectSchoolName){
     ASSERT_TRUE(database.load(file));
 
     std::string ret = database.select(CollegeDatabaseColumns::SchoolName, "ol").str();
-    std::cout << ret << std::endl;
-    EXPECT_FALSE(ret.empty());
+    EXPECT_EQ("DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n2,College,,,,\n3,School,1,2,3,4\n", ret);
 
     ret = database.select(CollegeDatabaseColumns::SchoolName, "Escola").str();
-    std::cout << ret << std::endl;
-    EXPECT_TRUE(ret.empty());
+    EXPECT_EQ("DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n", ret);
 }
 
 int main(int argc, char **argv) {

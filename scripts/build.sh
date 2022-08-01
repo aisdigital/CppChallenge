@@ -2,7 +2,7 @@
 
 if [ $# -lt 1 ]; then
     echo "Please, run # build.sh <TARGET>"
-    echo "    TARGET - Target of build e.g.: CppChallenge, CSVFileTests, etc"
+    echo "    TARGET - Target of build e.g.: CppChallenge, CSVFileTests, CollegeDatabaseTests"
     echo "Example: build.sh CppChallenge"
     exit 1
 fi
