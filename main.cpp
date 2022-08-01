@@ -1,9 +1,12 @@
 // Challenge C++ AISDigital
 
+#include "MainMenu.hpp"
+
 #include <iostream>
 
 int main(int argc, const char * argv[]) { 
-  std::cout << "Challenge C++" << std::endl;
+  MainMenu menu;
+  menu.Start();
   return 0;
 }
 
