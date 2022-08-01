@@ -10,4 +10,4 @@ include_directories(include)
 FILE(GLOB HEADERS include/*.h)
 FILE(GLOB SRC src/*.cpp)
 
-add_executable(CppChallenge main.cpp ${HEADERS} ${SRC} "src/SchoolData.cpp" "include/SchoolData.hpp" "src/MainMenu.cpp")
+add_executable(CppChallenge main.cpp ${HEADERS} ${SRC})
