@@ -13,8 +13,9 @@ int main(int argc, const char * argv[])
     std::cout << "Challenge C++" << std::endl;
     vector<string> data = read_file("./input/SAT__College_Board__2010_School_Level_Results.csv");
     vector<school*> schools = build_school_list(vector<string>(data.begin() + SKIP_FIRST_ITEM, data.end()));
+    unordered_map<string, school*> schools_fast_lookup;
 
-    print_schools(schools);
+    build_school_fast_lookup(schools, schools_fast_lookup);
 
     while(true)
     {
@@ -24,7 +25,7 @@ int main(int argc, const char * argv[])
                 search_by_name();
             break;
             case 2:
-                search_by_dbn();
+                search_by_dbn(schools_fast_lookup);
             break;
             case 3:
                 return 0;

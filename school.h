@@ -11,7 +11,6 @@ using namespace std;
 class school
 {
 private:
-    static const int NOT_PRESENT = -1;
     string _dbn;
     string _name;
     int _number_test_takers = NOT_PRESENT;
@@ -28,6 +27,13 @@ public:
     string to_string();
     string to_csv();
     static school* create(string data);
+    string name();
+    string dbn();
+    int number_reading_mean();
+    int critical_reading_mean();
+    int mathematics_mean();
+    int writing_mean();
+    static const int NOT_PRESENT = -1;
 };
 
 school::school(std::string dbn, std::string name, int number_test_takers, int critical_reading_mean, int mathematics_mean, int writing_mean)
@@ -135,5 +141,35 @@ string school::to_string()
         << school::get_mean(_writing_mean);
 
     return ss.str();
+}
+
+string school::name()
+{
+    return this->_name;
+}
+
+string school::dbn()
+{
+    return this->_dbn;
+}
+
+int school::number_reading_mean()
+{
+    return this->_number_test_takers;
+}
+
+int school::critical_reading_mean()
+{
+    return this->_critical_reading_mean;
+}
+
+int school::mathematics_mean()
+{
+    return this->_mathematics_mean;
+}
+
+int school::writing_mean()
+{
+    return this->_writing_mean;
 }
 #endif

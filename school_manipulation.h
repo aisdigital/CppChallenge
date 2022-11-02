@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include "school.h"
 
 using namespace std;
@@ -28,6 +29,14 @@ void print_schools(vector<school*>& schools)
     {
         cout << i << ": " << school->to_string() << endl;
         i++;
+    }
+}
+
+void build_school_fast_lookup(vector<school*> data, unordered_map<string, school*>& fast_lookup)
+{
+    for (auto& d : data)
+    {
+        fast_lookup[d->dbn()] = d;
     }
 }
 
