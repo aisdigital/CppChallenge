@@ -16,7 +16,7 @@ class IIOStorage
 public:
     virtual int createDirectory(string directoryName) = 0;
     virtual vector<string> readFile(string filename) = 0;
-    virtual int writeCSV(string filename, vector<School*> schools) = 0;
+    virtual bool writeCSV(string filename, vector<School*> schools) = 0;
 };
 
 class IOStorage : public IIOStorage
@@ -26,7 +26,7 @@ public:
     ~IOStorage();
     int createDirectory(string directoryName);
     vector<string> readFile(string filename);
-    int writeCSV(string filename, vector<School*> schools);
+    bool writeCSV(string filename, vector<School*> schools);
 };
 
 IOStorage::IOStorage() {}
@@ -49,7 +49,7 @@ vector<string> IOStorage::readFile(string filename)
     return data;
 }
 
-int IOStorage::writeCSV(string filename, vector<School*> schools)
+bool IOStorage::writeCSV(string filename, vector<School*> schools)
 {
     try
     {
@@ -60,7 +60,7 @@ int IOStorage::writeCSV(string filename, vector<School*> schools)
         if (file.fail())
         {
             cout << "File not opened" << endl;
-            return -1;
+            return false;
         }
 
         for(School* school : schools)
@@ -70,12 +70,12 @@ int IOStorage::writeCSV(string filename, vector<School*> schools)
 
         file.close();
 
-        return 0;
+        return true;
     }
     catch(exception e)
     {
         cout << "Unable to write the file. Please check filename" << endl;
-        return -1;
+        return false;
     }
 }
 

@@ -4,10 +4,12 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 #include "Configuration.h"
 #include "Constant.h"
 #include "IOStorage.h"
 #include "School.h"
+#include "helper/string.h"
 
 #define SKIP_FIRST_ITEM 1
 
@@ -18,7 +20,7 @@ class Challenge
 private:
     IIOStorage* _ioStorage = nullptr;
     vector<School*> _schools;
-    unordered_map<string, School*> schoolsFastLookup;
+    unordered_map<string, School*> _schoolsFastLookup;
     int printMenu();
     void searchByName();
     void searchByDBN();
@@ -26,6 +28,10 @@ private:
     string inputFile();
     void buildFastLookup(vector<School*> data, unordered_map<string, School*>& fast_lookup);
     void printSchools(vector<School*> schools);
+    vector<School*> findSchoolByName(string name, vector<School*>& schools);
+    static bool sortByName(School* a, School* b);
+    bool isYes(string value);
+    string outputPath(string filename);
 public:
     Challenge(IIOStorage* ioStorage);
     ~Challenge();
@@ -50,9 +56,7 @@ void Challenge::Execute()
     vector<string> data = _ioStorage->readFile(inputFile());
     _schools = buildSchoolList(vector<string>(data.begin() + SKIP_FIRST_ITEM, data.end()));
     
-    buildFastLookup(_schools, schoolsFastLookup);
-
-    _ioStorage->writeCSV("dir", _schools);
+    buildFastLookup(_schools, _schoolsFastLookup);
 
     while(true)
     {
@@ -86,7 +90,36 @@ int Challenge::printMenu()
 
 void Challenge::searchByName()
 {
-    cout << "searchByName" <<endl;
+    string name, filename, want_to_save;
+
+    cout << "Name: ";
+    cin >> name;
+
+    vector<School*> filtered_schools = findSchoolByName(name, _schools);
+
+    sort(filtered_schools.begin(), filtered_schools.end(), sortByName);
+
+    cout << "Schools found:" << endl;
+
+    printSchools(filtered_schools);
+
+    cout << "Do you want to save in csv? (y/Y/Yes): ";
+    cin >> want_to_save;
+
+    if (isYes(want_to_save))
+    {
+        cout << "Filename: ";
+        cin >> filename;
+
+        string fullpath_filename = outputPath(filename);
+
+        _ioStorage->createDirectory(OUTPUT_DIRECTORY);
+
+        if (_ioStorage->writeCSV(fullpath_filename, filtered_schools))
+        {
+            cout << "Data has been written to: " << fullpath_filename << endl;
+        }
+    }
 }
 
 void Challenge::searchByDBN()
@@ -96,9 +129,9 @@ void Challenge::searchByDBN()
     cout << "DBN: ";
     cin >> dbn;
 
-    auto it = schoolsFastLookup.find(dbn);
+    auto it = _schoolsFastLookup.find(dbn);
 
-    if (it != schoolsFastLookup.end())
+    if (it != _schoolsFastLookup.end())
     {
         cout << (*it).second->toString() << endl << endl;
     }
@@ -147,6 +180,52 @@ void Challenge::printSchools(vector<School*> schools)
         cout << i << ": " << school->toString() << endl;
         i++;
     }
+}
+
+vector<School*> Challenge::findSchoolByName(string name, vector<School*>& schools)
+{
+    vector<School*> found;
+
+    uppercase(name);
+
+    for(auto* school : schools)
+    {
+        string school_name = school->name();
+        
+        uppercase(school_name);
+        
+        if (school_name.find(name) != -1)
+        {
+            found.push_back(school);
+        }
+    }
+
+    return found;
+}
+
+bool Challenge::sortByName(School* a, School* b)
+{
+    return a->name() < b->name();
+}
+
+bool Challenge::isYes(string value)
+{
+    uppercase(value);
+
+    return value == "Y" || value == "YES";
+}
+
+string Challenge::outputPath(string filename)
+{
+    std::stringstream ss;
+
+    ss << ".";
+    ss << SEP;
+    ss << OUTPUT_DIRECTORY;
+    ss << SEP;
+    ss << filename;
+
+    return ss.str();
 }
 
 #endif

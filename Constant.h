@@ -2,7 +2,7 @@
 #define __CONSTANT_H__
 
 /*
-* Global variable goes here.
+* Global variables go here.
 */
 
 #ifdef _WIN32
