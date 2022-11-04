@@ -23,6 +23,5 @@ if (ENABLE_UNIT_TESTS) # If this was a submodule or something similar we could w
     # We could also add some basic code coverage with lcov or other report tool
 endif()
 
-include_directories(include)
-add_subdirectory(src)
+add_subdirectory(college_data)
 add_subdirectory(app)
