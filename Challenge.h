@@ -11,7 +11,7 @@
 #include "School.h"
 #include "helper/string.h"
 
-#define SKIP_FIRST_ITEM 1
+#define SKIP_CSV_HEADER 1
 
 using namespace std;
 
@@ -24,11 +24,11 @@ private:
     int printMenu();
     void searchByName();
     void searchByDBN();
-    vector<School*> buildSchoolList(vector<string> data);
+    void buildSchoolList(vector<School*>& schools, vector<string>& data);
     string inputFile();
-    void buildFastLookup(vector<School*> data, unordered_map<string, School*>& fast_lookup);
-    void printSchools(vector<School*> schools);
-    vector<School*> findSchoolByName(string name, vector<School*>& schools);
+    void buildFastLookup(vector<School*>& data, unordered_map<string, School*>& fast_lookup);
+    void printSchools(vector<School*>& schools);
+    void findSchoolByName(string name, vector<School*>& schools, vector<School*>& found);
     static bool sortByName(School* a, School* b);
     bool isYes(string value);
     string outputPath(string filename);
@@ -53,9 +53,12 @@ Challenge::~Challenge()
 
 void Challenge::Execute()
 {
-    vector<string> data = _ioStorage->readFile(inputFile());
-    _schools = buildSchoolList(vector<string>(data.begin() + SKIP_FIRST_ITEM, data.end()));
+    vector<string> data;
     
+    _ioStorage->readFile(inputFile(), data);
+
+    buildSchoolList(_schools, data);
+
     buildFastLookup(_schools, _schoolsFastLookup);
 
     while(true)
@@ -91,11 +94,12 @@ int Challenge::printMenu()
 void Challenge::searchByName()
 {
     string name, filename, want_to_save;
+    vector<School*> filtered_schools;
 
     cout << "Name: ";
     cin >> name;
 
-    vector<School*> filtered_schools = findSchoolByName(name, _schools);
+    findSchoolByName(name, _schools, filtered_schools);
 
     sort(filtered_schools.begin(), filtered_schools.end(), sortByName);
 
@@ -137,17 +141,14 @@ void Challenge::searchByDBN()
     }
 }
 
-vector<School*> Challenge::buildSchoolList(vector<string> data)
+void Challenge::buildSchoolList(vector<School*>& schools, vector<string>& data)
 {
-    vector<School*> schools;
+    int total = data.size();
 
-    for (auto& d : data)
+    for (int i = SKIP_CSV_HEADER; i < total; ++i)
     {
-        School* school = School::create(d);
-        schools.push_back(school);
+        schools.push_back(School::create(data[i]));
     }
-
-    return schools;
 }
 
 string Challenge::inputFile()
@@ -163,7 +164,7 @@ string Challenge::inputFile()
     return ss.str();
 }
 
-void Challenge::buildFastLookup(vector<School*> schools, unordered_map<string, School*>& fast_lookup)
+void Challenge::buildFastLookup(vector<School*>& schools, unordered_map<string, School*>& fast_lookup)
 {
     for (auto& school : schools)
     {
@@ -171,7 +172,7 @@ void Challenge::buildFastLookup(vector<School*> schools, unordered_map<string, S
     }
 }
 
-void Challenge::printSchools(vector<School*> schools)
+void Challenge::printSchools(vector<School*>& schools)
 {
     int i = 1;
 
@@ -182,10 +183,8 @@ void Challenge::printSchools(vector<School*> schools)
     }
 }
 
-vector<School*> Challenge::findSchoolByName(string name, vector<School*>& schools)
+void Challenge::findSchoolByName(string name, vector<School*>& schools, vector<School*>& found)
 {
-    vector<School*> found;
-
     uppercase(name);
 
     for(auto* school : schools)
@@ -199,8 +198,6 @@ vector<School*> Challenge::findSchoolByName(string name, vector<School*>& school
             found.push_back(school);
         }
     }
-
-    return found;
 }
 
 bool Challenge::sortByName(School* a, School* b)
