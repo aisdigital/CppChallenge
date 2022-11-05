@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include "school.h"
-#include "data_analysis.h"
+#include "data_classes.h"
 
 namespace CollegeData
 {
@@ -20,7 +20,7 @@ namespace CollegeData
 
 	  protected:
 		friend class DataAnalysis;
-		std::map<std::string, School *> &GetSchoolMap();
+		std::map<std::string, School *> const &GetSchoolMap(); // Map with duplicated DBN info.. (key and inside school structure)
 
 	  public:
 		DataStorage() {}

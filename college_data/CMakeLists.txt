@@ -24,7 +24,7 @@ add_library(college_data_lib STATIC
 target_include_directories(college_data_lib PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 # Define library version
-target_compile_definitions(college_data_lib PUBLIC RTCTRLLIB_VERSION=0)
+target_compile_definitions(college_data_lib PUBLIC COLLEGE_DATA_LIB_VERSION=0)
 
 # Google Test
 if (ENABLE_UNIT_TESTS)

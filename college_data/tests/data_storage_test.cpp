@@ -13,7 +13,7 @@ using namespace std;
 using namespace CollegeData;
 
 // Fixture
-class data_storage_test : public ::testing::Test, public ::testing::Environment
+class data_storage_test : public ::testing::Test
 {
   protected:
 	ifstream test_data;

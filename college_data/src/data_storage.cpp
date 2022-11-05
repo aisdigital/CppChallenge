@@ -69,8 +69,9 @@ namespace CollegeData
 		school->writing_mean = (s_aux == "") ? 0 : stoi(s_aux);
 
 		if (school_map.count(school->dbn))
-		{// Fixed the logic for duplicated DBN keys.. could have prompt the user or something else..
-		 // Informative cout only, should replace with a looger or another output
+		{// The README says the DBN are unique
+		 // Here duplicated DBN keys are ignored.. could have prompt the user to choose or something else..
+		 // Informative cout only, should replace with a logger or another output
 		 // cout << "Found duplicated school DBN key !!" << endl;
 		 // cout << "\tNew (ignoring): " << school->dbn << " | " << school->name << endl;
 		 // cout << "\tOld (keeping): " << school_map[school->dbn]->dbn << " | " << school_map[school->dbn]->name << endl;
@@ -99,5 +100,10 @@ namespace CollegeData
 	unsigned int DataStorage::GetNumberOfAddedSchools()
 	{
 		return school_map.size();
+	}
+
+	std::map<std::string, School *> const &DataStorage::GetSchoolMap()
+	{
+		return school_map;
 	}
 };// namespace CollegeData
