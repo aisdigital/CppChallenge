@@ -25,11 +25,23 @@ We’re rooting for you. 😁
 * CMake installed
 
 ## Instructions
-To run the project use basic cmake commands
 
-*  `cmake . -B ./build`
-*  `make -C ./build/ CppChallenge`
-*  `./build/CppChallenge`
+To compile the project use:
+```sh
+make build_all
+```
+To run the project use:
+```sh
+make run
+```
+To run the project unit tests use:
+```sh
+make run_unit_test
+```
+To clean up the project unit tests use:
+```sh
+make clean
+```
 
 After set it all up, let's go to the challenge \o/
 

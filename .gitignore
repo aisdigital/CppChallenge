@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/cmake,xcode,visualstudio,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=cmake,xcode,visualstudio,windows,macos
 
+# Output directory
+output
+
 ### CMake ###
 CMakeLists.txt.user
 CMakeCache.txt
