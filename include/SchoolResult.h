@@ -2,7 +2,7 @@
 
 #include <string>
 
-class SchoolTestResult {
+class SchoolResult {
 public:
     std::string dbn;
     std::string schoolName;
@@ -11,7 +11,7 @@ public:
     unsigned int mathematicsMean;
     unsigned int writingMean;
 
-    friend std::ostream& operator<<(std::ostream& out, SchoolTestResult const& result) {
+    friend std::ostream& operator<<(std::ostream& out, SchoolResult &result) {
         return out << "Results for " << result.schoolName << "(" << result.dbn << ")" << std::endl <<
                "Number of test takers: " << result.numberOfTestTakers << std::endl <<
                "Critical Reading Mean: " << result.criticalReadingMean << std::endl <<
