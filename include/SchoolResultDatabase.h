@@ -10,5 +10,5 @@ class SchoolResultDatabase {
 
 public:
     SchoolResultDatabase();
-    void loadDataFromCsvFile(std::string csvFilePath);
+    void loadDataFromCsvFile(const std::string &csvFilePath);
 };

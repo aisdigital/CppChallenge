@@ -8,7 +8,7 @@
 
 SchoolResultDatabase::SchoolResultDatabase() {}
 
-void SchoolResultDatabase::loadDataFromCsvFile(std::string csvFilePath) {
+void SchoolResultDatabase::loadDataFromCsvFile(const std::string &csvFilePath) {
     this->database.clear();
 
     std::ifstream csvFile(csvFilePath);
