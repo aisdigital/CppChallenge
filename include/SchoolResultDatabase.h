@@ -11,4 +11,5 @@ class SchoolResultDatabase {
 public:
     SchoolResultDatabase();
     void loadDataFromCsvFile(const std::string &csvFilePath);
+    bool searchBySchoolName(std::string searchString, std::vector<SchoolResult> &selectedSchools);
 };
