@@ -16,4 +16,5 @@ public:
 
     void showMenu();
     MenuOption getUserOption();
+    void open();
 };

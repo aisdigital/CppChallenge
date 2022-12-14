@@ -12,6 +12,6 @@ class App {
     std::string outputFile;
 
 public:
-    App(std::string inputFilePath, std::string outputFilePath);
+    App(std::string inputFilePath);
     void run();
 };

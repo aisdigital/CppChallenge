@@ -35,3 +35,11 @@ Cli::MenuOption Cli::getUserOption() {
         return MenuOption::Invalid;
     }
 }
+
+void Cli::open() {
+    printBlankLine();
+    printLine("=====================================================");
+    printLine("===========   SAT College Board Results   ===========");
+    printLine("=====================================================");
+    printBlankLine();
+}
