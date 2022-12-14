@@ -38,7 +38,7 @@ Cli::MenuOption Cli::getUserMenuOption() {
 
 bool Cli::getUserConfirmation(std::string question) {
     char answer;
-    std::cout << question << "[y/n]: ";
+    std::cout << question << " [y/n]: ";
     std::cin >> answer;
     return (answer == 'y');
 

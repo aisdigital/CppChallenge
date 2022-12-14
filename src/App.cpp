@@ -16,7 +16,7 @@ void App::run() {
     while (selectedOption != Cli::MenuOption::Exit) {
         switch (selectedOption) {
         case Cli::MenuOption::SearchByName: {
-            std::string targetName = this->interface.getUserInput("Type your search");
+            std::string targetName = this->interface.getUserInput("Enter your search for school name");
             std::vector<SatResult> results;
             if (this->database.searchBySchoolName(targetName, results)) {
                 std::cout << results;
@@ -30,14 +30,16 @@ void App::run() {
             break;
         }
         case Cli::MenuOption::SearchByDbn: {
-            std::string targetDbn = this->interface.getUserInput("Type your search");
+            std::string targetDbn = this->interface.getUserInput("Enter your search for school DBN");
             SatResult result;
             if (this->database.searchByDbn(targetDbn, result)) {
                 std::cout << result;
             }
             break;
         }
+        case Cli::MenuOption::Invalid:  // Intentional fall through
         default:
+            std::cout << "Invalid option!" << std::endl << std::endl;
             break;
         }
 
