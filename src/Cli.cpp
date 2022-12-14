@@ -20,18 +20,20 @@ void Cli::showMenu() {
 }
 
 Cli::MenuOption Cli::getUserMenuOption() {
-    int option = 0;
-    printLine("Enter the option number and press 'Enter'");
+    std::string option;
+    std::cout << "Type your option and press 'Enter': ";
     std::cin >> option;
     
-    switch (option) {
-    case 1:
+    if (option == "1") {
         return MenuOption::SearchByName;
-    case 2:
+    }
+    else if (option == "2") {
         return MenuOption::SearchByDbn;
-    case 3:
+    }
+    else if (option == "3") {
         return MenuOption::Exit;
-    default:
+    }
+    else {
         return MenuOption::Invalid;
     }
 }
@@ -47,7 +49,8 @@ bool Cli::getUserConfirmation(std::string question) {
 std::string Cli::getUserInput(std::string predicate) {
     std::string inputText;
     std::cout << predicate << ": ";
-    std::cin >> inputText;
+    std::cin.ignore();
+    std::getline(std::cin, inputText);
     return inputText;
 }
 
