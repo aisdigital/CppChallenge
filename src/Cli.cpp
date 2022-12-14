@@ -11,6 +11,11 @@ void Cli::printBlankLine() {
 }
 
 void Cli::showMenu() {
+    printBlankLine();
+    printLine("=====================================================");
+    printLine("===========   SAT College Board Results   ===========");
+    printLine("=====================================================");
+    printBlankLine();
     printLine("Options:");
     printBlankLine();
     printLine("1 -> Search School SAT result by name");
@@ -39,11 +44,11 @@ Cli::MenuOption Cli::getUserMenuOption() {
 }
 
 bool Cli::getUserConfirmation(std::string question) {
-    char answer;
+    std::string answer;
     std::cout << question << " [y/n]: ";
-    std::cin >> answer;
-    return (answer == 'y');
-
+    std::cin.ignore();
+    std::getline(std::cin, answer);
+    return (answer == "y");
 }
 
 std::string Cli::getUserInput(std::string predicate) {
@@ -52,14 +57,6 @@ std::string Cli::getUserInput(std::string predicate) {
     std::cin.ignore();
     std::getline(std::cin, inputText);
     return inputText;
-}
-
-void Cli::open() {
-    printBlankLine();
-    printLine("=====================================================");
-    printLine("===========   SAT College Board Results   ===========");
-    printLine("=====================================================");
-    printBlankLine();
 }
 
 void Cli::close() {

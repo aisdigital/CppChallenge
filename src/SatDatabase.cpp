@@ -33,7 +33,6 @@ void SatDatabase::loadDataFromCsvFile(const std::string &csvFilePath) {
                 std::string complementar_token;
                 getline(stream, complementar_token, '"');
                 tokens.push_back(token + ',' + complementar_token);
-                std::cout << "token = " << (token + ',' + complementar_token) << std::endl;
             }
         }
         

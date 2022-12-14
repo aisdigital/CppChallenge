@@ -13,11 +13,12 @@ public:
     std::string writingMean;
 
     friend std::ostream& operator<<(std::ostream& out, SatResult &result) {
-        return out << result.schoolName << ','
-                   << result.numberOfTestTakers << ','
-                   << result.criticalReadingMean << ','
-                   << result.mathematicsMean << ','
-                   << result.writingMean << std::endl;
+        return out << std::endl
+                   << "========== " << result.schoolName << " ==========" << std::endl
+                   << "Number of test takers: " << result.numberOfTestTakers << std::endl
+                   << "Critical Reading Mean: " << result.criticalReadingMean << std::endl
+                   << "Mathematics Mean: " << result.mathematicsMean << std::endl
+                   << "Writing Mean: " << result.writingMean << std::endl;
     }
 
     friend std::ostream& operator<<(std::ostream& out, std::vector<SatResult> &results) {

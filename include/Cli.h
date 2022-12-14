@@ -18,6 +18,5 @@ public:
     MenuOption getUserMenuOption();
     bool getUserConfirmation(std::string question);
     std::string getUserInput(std::string predicate);
-    void open();
     void close();
 };
