@@ -13,13 +13,13 @@ void Cli::printBlankLine() {
 void Cli::showMenu() {
     printLine("Options:");
     printBlankLine();
-    printLine("[ 1 ] Search School SAT result by name");
-    printLine("[ 2 ] Search School SAT result by DBN");
-    printLine("[ 3 ] Exit");
+    printLine("1 -> Search School SAT result by name");
+    printLine("2 -> Search School SAT result by DBN");
+    printLine("3 -> Exit");
     printBlankLine(); 
 }
 
-Cli::MenuOption Cli::getUserOption() {
+Cli::MenuOption Cli::getUserMenuOption() {
     int option = 0;
     printLine("Enter the option number and press 'Enter'");
     std::cin >> option;
@@ -36,9 +36,17 @@ Cli::MenuOption Cli::getUserOption() {
     }
 }
 
-std::string Cli::getUserSearchText() {
+bool Cli::getUserConfirmation(std::string question) {
+    char answer;
+    std::cout << question << "[y/n]: ";
+    std::cin >> answer;
+    return (answer == 'y');
+
+}
+
+std::string Cli::getUserInput(std::string predicate) {
     std::string inputText;
-    std::cout << "Search: ";
+    std::cout << predicate << ": ";
     std::cin >> inputText;
     return inputText;
 }

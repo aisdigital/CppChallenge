@@ -9,7 +9,6 @@ class App {
     Cli interface;
     SatDatabase database;
     std::string inputFile;
-    std::string outputFile;
 
 public:
     App(std::string inputFilePath);

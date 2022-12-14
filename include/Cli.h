@@ -3,8 +3,8 @@
 #include <string>
 
 class Cli {
-    void printLine(const std::string &text);
     void printBlankLine();
+    void printLine(const std::string &text);
     
 public:
     enum class MenuOption {
@@ -15,8 +15,9 @@ public:
     };
 
     void showMenu();
-    MenuOption getUserOption();
-    std::string getUserSearchText();
+    MenuOption getUserMenuOption();
+    bool getUserConfirmation(std::string question);
+    std::string getUserInput(std::string predicate);
     void open();
     void close();
 };
