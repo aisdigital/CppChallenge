@@ -11,11 +11,12 @@ void Cli::printBlankLine() {
 }
 
 void Cli::showMenu() {
-    printLine("Please select an option below:");
+    printLine("Options:");
     printBlankLine();
     printLine("[ 1 ] Search School SAT result by name");
     printLine("[ 2 ] Search School SAT result by DBN");
-    printLine("[ 3 ] Exit");    
+    printLine("[ 3 ] Exit");
+    printBlankLine(); 
 }
 
 Cli::MenuOption Cli::getUserOption() {
@@ -23,8 +24,7 @@ Cli::MenuOption Cli::getUserOption() {
     printLine("Enter the option number and press 'Enter'");
     std::cin >> option;
     
-    switch (option)
-    {
+    switch (option) {
     case 1:
         return MenuOption::SearchByName;
     case 2:
@@ -36,10 +36,23 @@ Cli::MenuOption Cli::getUserOption() {
     }
 }
 
+std::string Cli::getUserSearchText() {
+    std::string inputText;
+    std::cout << "Search: ";
+    std::cin >> inputText;
+    return inputText;
+}
+
 void Cli::open() {
     printBlankLine();
     printLine("=====================================================");
     printLine("===========   SAT College Board Results   ===========");
     printLine("=====================================================");
+    printBlankLine();
+}
+
+void Cli::close() {
+    printBlankLine();
+    printLine("Closing application...");
     printBlankLine();
 }

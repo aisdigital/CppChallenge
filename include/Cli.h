@@ -16,5 +16,7 @@ public:
 
     void showMenu();
     MenuOption getUserOption();
+    std::string getUserSearchText();
     void open();
+    void close();
 };

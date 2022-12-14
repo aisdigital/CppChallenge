@@ -14,7 +14,6 @@ void SatDatabase::loadDataFromCsvFile(const std::string &csvFilePath) {
 
     std::ifstream csvFile(csvFilePath);
     if (!csvFile) {
-        std::cout << "Specified CSV file \"" << csvFilePath << "\" not found" << std::endl;
         return;
     }
     
