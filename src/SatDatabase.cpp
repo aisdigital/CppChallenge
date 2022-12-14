@@ -25,7 +25,16 @@ void SatDatabase::loadDataFromCsvFile(const std::string &csvFilePath) {
         std::stringstream stream(row);
         
         while (getline(stream, token, ',')) {
-            tokens.push_back(token);
+            if (token.find('"') == std::string::npos) {     // Unquoted cell
+                tokens.push_back(token);
+            }
+            else {                                          // Quoted cell
+                token.erase(remove(token.begin(), token.end(), '"'), token.end());
+                std::string complementar_token;
+                getline(stream, complementar_token, '"');
+                tokens.push_back(token + ',' + complementar_token);
+                std::cout << "token = " << (token + ',' + complementar_token) << std::endl;
+            }
         }
         
         SatResult result;
