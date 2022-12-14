@@ -6,10 +6,10 @@
 #include "SatDatabase.h"
 
 class App {
-    Cli _interface;
-    SatDatabase _database;
-    std::string _inputFile;
-    std::string _outputFile;
+    Cli interface;
+    SatDatabase database;
+    std::string inputFile;
+    std::string outputFile;
 
 public:
     App(std::string inputFilePath, std::string outputFilePath);
