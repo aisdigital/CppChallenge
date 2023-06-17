@@ -27,7 +27,7 @@ FILE(GLOB SRC src/*.cpp)
 target_sources(MainLibrary PRIVATE ${HEADERS} ${SRC})
 
 # Create a list of all the test source files
-FILE(GLOB TEST_SRC src/*_test.cpp)
+FILE(GLOB TEST_SRC tests/*.cpp)
 
 enable_testing()
 add_executable(${TEST_NAME} ${TEST_SRC})
