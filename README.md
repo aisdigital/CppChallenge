@@ -28,8 +28,15 @@ We’re rooting for you. 😁
 To run the project use basic cmake commands
 
 *  `cmake . -B ./build`
-*  `make -C ./build/ CppChallenge`
+*  `make -C ./build/ CppChallenge CppChallenge_test`
 *  `./build/CppChallenge`
+* `./build/CppChallenge_test`
+
+To run the project using bazel:
+
+* `bazel build :CppChallenge`
+* `./bazel-bin/CppChallenge`
+* `./bazel-bin/CppChallenge_test`
 
 After set it all up, let's go to the challenge \o/
 
