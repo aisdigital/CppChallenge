@@ -28,7 +28,6 @@ void CSVParser::parseCSV(std::shared_ptr<std::promise<RecordsData>> promise) {
 
 	while(std::getline(input,line)) {
 		Record newRecord = {};
-		auto pos = std::string::npos;
 		std::string entry;
 
 		entry = getFieldEntry(line);

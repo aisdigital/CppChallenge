@@ -34,7 +34,7 @@ To run the project use basic cmake commands
 
 To run the project using bazel:
 
-* `bazel build :CppChallenge`
+* `bazel build --cxxopt=-std=c++17 --test_output=all :CppChallenge`
 * `./bazel-bin/CppChallenge`
 * `./bazel-bin/CppChallenge_test`
 
