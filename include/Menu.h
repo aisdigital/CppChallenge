@@ -7,7 +7,10 @@ public:
 	Menu() = default;
 	~Menu() = default;
 
-	void run(const std::future<std::vector<Record>>& futureRecords) override;
+	void printLoading() override;
+	int printMain() override;
+	std::string printSearchByDbn() override;
+	std::string printSearchByName() override;
 };
 
 

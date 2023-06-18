@@ -2,11 +2,12 @@
 
 #include <future>
 #include <vector>
-#include "Record.h"
+
+#include "RecordsData.h"
 
 class ICSVParser {
 public:
 	virtual ~ICSVParser() = default;
-	virtual std::future<std::vector<Record>> parse() = 0;
+	virtual std::future<RecordsData> parse() = 0;
 };
 

@@ -1,24 +1,18 @@
 // Challenge C++ AISDigital
 
-#include <memory>
-
+#include "Controller.h"
 #include "CSVParser.h"
 #include "Menu.h"
 
 int main() { 
-	const std::string fileName = "data.csv";
+	const std::string fileName = "input/SAT__College_Board__2010_School_Level_Results";
 
-	// Create an instance of the CSV parser
+	// Create an instance of the CSV parser and for the menu printer
 	std::unique_ptr<ICSVParser> csvParser = std::make_unique<CSVParser>(fileName);
-
-	// Start the parsing asynchronously and get the future
-	std::future<std::vector<Record>> futureRecords = csvParser->parse();
-
-	// Create an instance of the menu
 	std::unique_ptr<IMenu> menu = std::make_unique<Menu>();
 
-	// Run the menu and wait for data processing
-	menu->run(futureRecords);
+	Controller control(std::move(csvParser), std::move(menu));
+	control.run();
 
 	return 0;
 }
