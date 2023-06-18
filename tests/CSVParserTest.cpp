@@ -9,11 +9,11 @@
 class CSVParserTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // Create a temporary CSV file with test data
-        std::ofstream file("test.csv");
-        file << "DBN,School Name,Test Takers,Critical Reading Mean,Maths Mean,Writing Mean\n";
-	file << "01M292,Henry Street School for International Studies ,31,391,425,385\n";
-        file.close();
+		// Create a temporary CSV file with test data
+		std::ofstream file("test.csv");
+		file << "DBN,School Name,Test Takers,Critical Reading Mean,Maths Mean,Writing Mean\n";
+		file << "01M292,Henry Street School for International Studies ,31,391,425,385\n";
+		file.close();
     }
 
     void TearDown() override {

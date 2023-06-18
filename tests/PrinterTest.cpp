@@ -2,9 +2,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "Menu.h" 
+#include "Printer.h" 
 
-class MenuTest : public ::testing::Test {
+class PrinterTest : public ::testing::Test {
 protected:
     void SetUp() override {
         // Redirect cout
@@ -28,8 +28,8 @@ protected:
     std::streambuf* cinBuffer;
 };
 
-TEST_F(MenuTest, loadingTest) {
-    Menu menu;
+TEST_F(PrinterTest, loadingTest) {
+    Printer menu;
     menu.printLoading();
 
 	const std::string output = outputStream.str();
@@ -38,10 +38,10 @@ TEST_F(MenuTest, loadingTest) {
     EXPECT_NE(output.find("data"), std::string::npos);
 }
 
-TEST_F(MenuTest, mainTest) {
+TEST_F(PrinterTest, mainTest) {
     inputStream << "1\n";
 
-    Menu menu;
+    Printer menu;
     auto returnValue = menu.printMain();
 
 	EXPECT_EQ(returnValue, 1);
@@ -71,10 +71,10 @@ TEST_F(MenuTest, mainTest) {
 	}
 }
 
-TEST_F(MenuTest, searchByDbnTest) {
+TEST_F(PrinterTest, searchByDbnTest) {
     inputStream << "123456789\n";
 
-    Menu menu;
+    Printer menu;
     std::string dbn = menu.printSearchByDbn();
 
     std::string expectedOutput = "\nType DBN and press Enter: ";
@@ -82,10 +82,10 @@ TEST_F(MenuTest, searchByDbnTest) {
     EXPECT_EQ(dbn, "123456789");
 }
 
-TEST_F(MenuTest, searchByNameTest) {
+TEST_F(PrinterTest, searchByNameTest) {
     inputStream << "Test School\n";
 
-    Menu menu;
+    Printer menu;
     std::string name = menu.printSearchByName();
 
     std::string expectedOutput = "\nType the school name and press Enter: ";

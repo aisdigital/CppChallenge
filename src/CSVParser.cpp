@@ -29,30 +29,26 @@ void CSVParser::parseCSV(std::shared_ptr<std::promise<RecordsData>> promise) {
 	while(std::getline(input,line)) {
 		Record newRecord = {};
 		auto pos = std::string::npos;
+		std::string entry;
 
-		pos = line.find(',');
-		newRecord.dbn = trim(line.substr(0, pos));
-		line = line.substr(pos + 1);
+		entry = getFieldEntry(line);
+		newRecord.dbn = entry;
 
-		pos = line.find(',');
-		newRecord.schoolName = trim(line.substr(0, pos));
-		line = line.substr(pos + 1);
+		entry = getFieldEntry(line);
+		newRecord.schoolName = entry;
 
-		pos = line.find(',');
-		newRecord.testTakers = std::stoi( line.substr(0, pos) );
-		line = line.substr(pos + 1);
+		entry = getFieldEntry(line);
+		newRecord.testTakers = entry.empty() ? 0 : std::stoi(entry);
 
-		pos = line.find(',');
-		newRecord.criticalReadingMean = std::stoi( line.substr(0, pos) );
-		line = line.substr(pos + 1);
+		entry = getFieldEntry(line);
+		newRecord.criticalReadingMean = entry.empty() ? 0 : std::stoi(entry);
 
-		pos = line.find(',');
-		newRecord.mathsMean = std::stoi( line.substr(0, pos) );
-		line = line.substr(pos + 1);
+		
+		entry = getFieldEntry(line);
+		newRecord.mathsMean = entry.empty() ? 0 : std::stoi(entry);
 
-		pos = line.find(',');
-		newRecord.writingMean = std::stoi( line.substr(0, pos) );
-		line = line.substr(pos + 1);
+		entry = getFieldEntry(line);
+		newRecord.writingMean = entry.empty() ? 0 : std::stoi(entry);
 
 		recordsData[newRecord.dbn] = newRecord;
 	}
@@ -60,7 +56,30 @@ void CSVParser::parseCSV(std::shared_ptr<std::promise<RecordsData>> promise) {
 	promise->set_value(std::move(recordsData));
 }
 
+std::string CSVParser::getFieldEntry(std::string& line) {
+    std::string entry;
+
+	if(line.empty()) {
+		return entry;
+	}
+
+	if(line[0] == '"') {
+		auto pos = line.find('"', 1);
+		if(pos != std::string::npos) {
+			entry = trim(line.substr(1, pos - 1));
+			line = line.substr(pos + 1);
+		}
+	} else {
+		auto pos = line.find(',');
+		entry = trim(line.substr(0, pos));
+		line = line.substr(pos + 1);
+	}
+
+    return entry;
+}
+
 std::string CSVParser::trim(const std::string& s) {
 	auto pos = s.find_last_not_of(' ');
 	return s.substr(0, pos + 1);
 }
+

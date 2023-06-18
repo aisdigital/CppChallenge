@@ -2,12 +2,16 @@
 
 #include <string>
 
-class IMenu {
+#include "RecordsData.h"
+
+class IPrinter {
 public:
-	virtual ~IMenu() = default;
+	virtual ~IPrinter() = default;
 	virtual void printLoading() = 0;
 	virtual int printMain() = 0;
 	virtual std::string printSearchByDbn() = 0;
 	virtual std::string printSearchByName() = 0;
+	virtual void printRecord(const Record& record) = 0;
+	virtual char printOutputQuestion() = 0;
 };
 
