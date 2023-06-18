@@ -1,14 +1,24 @@
 // Challenge C++ AISDigital
 
-#include <iostream>
-#include "add.h"
+#include <memory>
 
-int main(int argc, const char * argv[]) { 
-	std::cout << "Challenge C++" << std::endl;
+#include "CSVParser.h"
+#include "Menu.h"
 
-	auto result = add( 1, 3 );
-	std::cout << "Add Result = " << result << std::endl;
+int main() { 
+	const std::string fileName = "data.csv";
+
+	// Create an instance of the CSV parser
+	std::unique_ptr<ICSVParser> csvParser = std::make_unique<CSVParser>(fileName);
+
+	// Start the parsing asynchronously and get the future
+	std::future<std::vector<Record>> futureRecords = csvParser->parse();
+
+	// Create an instance of the menu
+	std::unique_ptr<IMenu> menu = std::make_unique<Menu>();
+
+	// Run the menu and wait for data processing
+	menu->run(futureRecords);
 
 	return 0;
 }
-
