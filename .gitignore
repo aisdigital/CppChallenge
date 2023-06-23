@@ -476,3 +476,14 @@ MigrationBackup/
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/cmake,xcode,visualstudio,windows,macos
+
+input/
+#Bazel
+bazel
+bazel-bazel-test
+bazel-bin
+bazel-genfiles
+bazel-out
+bazel-testlogs
+bazel-vagrant
+bazel-CppChallenge
