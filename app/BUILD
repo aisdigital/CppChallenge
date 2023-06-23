@@ -10,6 +10,6 @@ cc_library (
 
 cc_binary(
     name = "cpp_challenge",
-    srcs = ["bin/main.cpp"],
+    srcs = ["main/main.cpp"],
     deps = [ ":lib_cli" ]
 )
