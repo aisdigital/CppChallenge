@@ -7,19 +7,6 @@ Database::Database(std::string filePath) :
 
 Database::~Database() {}
 
-/// @brief Returns all SAT records containing @name
-/// @param name 
-/// @return 
-std::vector<DatabaseRecord> Database::searchByName(std::string name) {
-    std::vector<DatabaseRecord> data;
-    return data;
-}
-
-DatabaseRecord Database::searchByDbn(std::string dbn) {
-    auto found = records.find(dbn);
-    return found->second;
-}
-
 /// @brief Starts database while loading data from CSV file asynchronously in a new thread
 /// @param path: CSV file path where data is stored
 void Database::startDatabase() {
@@ -62,10 +49,54 @@ void Database::parseCsv(std::promise<std::unordered_map<std::string, DatabaseRec
         }
     }
     else {
-        // Keep promise even if file is not found
-        promise.set_value(data);
+        promise.set_value(data);  // Keep promise even if file is not found
         return;
     }
-    // Keep promise!
-    promise.set_value(data);
+    promise.set_value(data);      // Keep promise!
+}
+
+/// @brief Search and returns all DatabaseRecords where school name contains the query string
+/// @param name Query string
+/// @param found Output parameter that represents if a search result was found
+/// @return vector of DatabaseRecord sorted by school name
+std::vector<DatabaseRecord> Database::searchByName(std::string name, bool& found) {
+    std::vector<DatabaseRecord> searchResults;
+    std::transform(name.begin(), name.end(), name.begin(), [](unsigned char c){ return std::tolower(c); });
+
+    for(auto it : this->records) {
+        std::string schoolName = it.second.getSchoolName();
+        std::transform(schoolName.begin(), schoolName.end(), schoolName.begin(), [](unsigned char c){ return std::tolower(c); });
+        if(schoolName.find(name) != std::string::npos) {
+            searchResults.push_back(it.second);
+        }
+    }
+
+    //sort data by school name
+    std::sort(searchResults.begin(), searchResults.end(), [ ](DatabaseRecord const& record1, DatabaseRecord const& record2) {
+        return record1.getSchoolName() < record2.getSchoolName();
+    });
+
+    if(searchResults.size() > 0) {
+        found = true;
+    } 
+    else {
+        found = false;
+    }
+    return searchResults;
+}
+
+/// @brief Search and return DatabaseRecord associated with provided DBN
+/// @param dbn Unique key DBN
+/// @param found Output parameter that represents if the search result was found
+/// @return DatabaseRecord associated with dbn key
+DatabaseRecord Database::searchByDbn(std::string dbn, bool& found) {
+    std::transform(dbn.begin(), dbn.end(), dbn.begin(), [](unsigned char c){ return std::toupper(c); }); // convert dbn to upper
+    auto result = this->records.find(dbn);
+    if(result != this->records.end()) {
+        found = true;
+    }
+    else {
+        found = false;
+    }
+    return result->second;
 }

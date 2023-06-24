@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 #include "DatabaseRecord.hpp"
 
 /*
@@ -19,8 +20,8 @@ public:
     Database(std::string filePath);
     ~Database();
 
-    std::vector<DatabaseRecord> searchByName(std::string name);
-    DatabaseRecord searchByDbn(std::string dbn);
+    std::vector<DatabaseRecord> searchByName(std::string name, bool& found);
+    DatabaseRecord searchByDbn(std::string dbn, bool& found);
 
 private:
     void startDatabase();
