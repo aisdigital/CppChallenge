@@ -5,6 +5,7 @@ cc_library (
     srcs = glob(["src/*.cpp"]),
     hdrs = glob(["include/*.hpp"]),
     includes = ["include"],
+    linkopts = ["-lpthread"],
     visibility = ["//app:__pkg__"]
 )
 

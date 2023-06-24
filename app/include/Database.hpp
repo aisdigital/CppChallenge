@@ -1,5 +1,11 @@
 #include <unordered_map>
 #include <vector>
+#include <functional>
+#include <future>
+#include <thread> 
+#include <fstream>
+#include <sstream>
+#include <iomanip>
 #include "DatabaseRecord.hpp"
 
 /*
@@ -17,6 +23,10 @@ public:
     DatabaseRecord searchByDbn(std::string dbn);
 
 private:
+    void startDatabase();
+    void parseCsv(std::promise<std::unordered_map<std::string, DatabaseRecord>> promise);
+
     std::unordered_map<std::string, DatabaseRecord> records;
-    void loadDatabase(std::string path);
+    std::string path;
+
 };
