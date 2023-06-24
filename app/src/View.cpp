@@ -85,5 +85,26 @@ bool View::querySaveFile() {
 }
 
 void View::showWarningNotFound(std::string searchTerm) {
-    std::cout << "No results were found for " << "\033[33m" << searchTerm << std::endl;
+    std::cout << "\nNo results were found for " << "\033[33m" << searchTerm << "\033[0m" << std::endl;
+}
+
+void View::printRecord(DatabaseRecord record) {
+    std::cout << "\n---------------------------------------------------------------------" << std::endl;
+    std::cout << "DBN: " << record.getDbn() << std::endl;
+    std::cout << "School Name: " << record.getSchoolName() << std::endl;
+    std::cout << "Test Takers: " << record.getTestTakers() << std::endl;
+    std::cout << "Critical Reading Mean: " << record.getCriticalReadingMean() << std::endl;
+    std::cout << "Mathematics Mean: " << record.getMathMean() << std::endl;
+    std::cout << "Writing Mean: " << record.getWritingMean() << std::endl;
+    std::cout << "---------------------------------------------------------------------" << std::endl;
+}
+
+void View::waitInputReturnToMenu() {
+    while (std::cin.get() != 'c') {
+        std::cout << "\nEnter [c] to continue to menu: ";
+    }
+}
+
+void View::showExitMsg() {
+    std::cout << "\nExiting..." << std::endl;
 }

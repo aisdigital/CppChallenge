@@ -10,6 +10,15 @@ DatabaseRecord::DatabaseRecord(std::string dbn, std::string schoolName, std::str
     writingMean(writingMean)
 {}
 
+DatabaseRecord::DatabaseRecord() :
+    dbn(""),
+    schoolName(""),
+    testTakers(""),
+    criticalReadingMean(""),
+    mathMean(""),
+    writingMean("") 
+{}
+
 DatabaseRecord::~DatabaseRecord() {}
 
 std::string DatabaseRecord::getDbn() const {

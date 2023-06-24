@@ -1,4 +1,5 @@
 #include <iostream>
+#include "DatabaseRecord.hpp"
 
 /*
 View.hpp: this class is responsible to print the menu and interact with the user
@@ -18,4 +19,7 @@ public:
     std::string querySaveFileName();
     bool querySaveFile();
     void showWarningNotFound(std::string msg);
+    void printRecord(DatabaseRecord record);
+    void waitInputReturnToMenu();
+    void showExitMsg();
 };
