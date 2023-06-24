@@ -12,26 +12,26 @@ DatabaseRecord::DatabaseRecord(std::string dbn, std::string schoolName, std::str
 
 DatabaseRecord::~DatabaseRecord() {}
 
-std::string DatabaseRecord::getDbn() {
+std::string DatabaseRecord::getDbn() const {
     return this->dbn;
 }
 
-std::string DatabaseRecord::getSchoolName() {
+std::string DatabaseRecord::getSchoolName() const {
     return this->schoolName;
 }
 
-std::string DatabaseRecord::getTestTakers() {
+std::string DatabaseRecord::getTestTakers() const {
     return this->testTakers;
 }
 
-std::string DatabaseRecord::getCriticalReadingMean() {
+std::string DatabaseRecord::getCriticalReadingMean() const {
     return this->criticalReadingMean;
 }
 
-std::string DatabaseRecord::getMathMean() {
+std::string DatabaseRecord::getMathMean() const {
     return this->mathMean;
 }
 
-std::string DatabaseRecord::getWritingMean() {
+std::string DatabaseRecord::getWritingMean() const {
     return this->writingMean;
 }

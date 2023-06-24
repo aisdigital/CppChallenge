@@ -12,12 +12,12 @@ public:
         std::string criticalReadingMean, std::string mathMean, std::string writingMean);
     ~DatabaseRecord();
 
-    std::string getDbn();
-    std::string getSchoolName();
-    std::string getTestTakers();
-    std::string getCriticalReadingMean();
-    std::string getMathMean();
-    std::string getWritingMean();
+    std::string getDbn() const;
+    std::string getSchoolName() const;
+    std::string getTestTakers() const;
+    std::string getCriticalReadingMean() const;
+    std::string getMathMean() const;
+    std::string getWritingMean() const;
 
 private:
     std::string dbn;

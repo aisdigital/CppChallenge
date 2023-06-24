@@ -13,4 +13,9 @@ public:
     
     void printMenu();
     int getUserOption();
+    std::string queryDbn();
+    std::string querySchoolName();
+    std::string querySaveFileName();
+    bool querySaveFile();
+    void showWarningNotFound(std::string msg);
 };
