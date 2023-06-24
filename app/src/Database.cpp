@@ -90,13 +90,15 @@ std::vector<DatabaseRecord> Database::searchByName(std::string name, bool& found
 /// @param found Output parameter that represents if the search result was found
 /// @return DatabaseRecord associated with dbn key
 DatabaseRecord Database::searchByDbn(std::string dbn, bool& found) {
+    DatabaseRecord ret;
     std::transform(dbn.begin(), dbn.end(), dbn.begin(), [](unsigned char c){ return std::toupper(c); }); // convert dbn to upper
     auto result = this->records.find(dbn);
     if(result != this->records.end()) {
         found = true;
+        ret = result->second;
     }
     else {
         found = false;
     }
-    return result->second;
+    return ret;
 }

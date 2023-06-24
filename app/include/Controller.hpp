@@ -17,4 +17,6 @@ public:
 private:
     View view;
     Database db;
+
+    void saveResultsToCsv(std::string fileName);
 };
