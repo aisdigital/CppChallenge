@@ -1,3 +1,6 @@
+#ifndef DATABASE_RECORD_HPP
+#define DATABASE_RECORD_HPP
+
 #include <string>
 
 /*
@@ -10,6 +13,7 @@ class DatabaseRecord {
 public:
     DatabaseRecord(std::string dbn, std::string schoolName, std::string testTakers, 
         std::string criticalReadingMean, std::string mathMean, std::string writingMean);
+    DatabaseRecord();
     ~DatabaseRecord();
 
     std::string getDbn() const;
@@ -27,3 +31,5 @@ private:
     std::string mathMean;
     std::string writingMean;
 };
+
+#endif
