@@ -36,7 +36,7 @@ void Controller::run() {
                     bool saveFile = this->view.querySaveFile();
                     if(saveFile) {
                         std::string outputFileName = this->view.querySaveFileName();
-
+                        this->saveResultsToCsv(results, outputFileName);
                     }
                 }
                 else {
@@ -55,6 +55,27 @@ void Controller::run() {
     }
 }
 
-void Controller::saveResultsToCsv(std::string fileName) {
-    
+/// @brief Write search results to a CSV file
+/// @param results List of database records to save
+/// @param fileName Output file name
+void Controller::saveResultsToCsv(std::vector<DatabaseRecord> results, std::string fileName) {
+    std::filesystem::create_directory("./output");
+    std::ofstream saveFile("output/"+fileName);
+
+    if(saveFile.is_open()) {
+        saveFile << "DBN,School Name,Number of Test Takers,Critical Reading Mean,Mathematics Mean,Writing Mean\n";
+        for(int i = 0; i < results.size(); i++) {
+            saveFile << results[i].getDbn()+",";
+            saveFile << results[i].getSchoolName()+",";
+            saveFile << results[i].getTestTakers()+",";
+            saveFile << results[i].getCriticalReadingMean()+",";
+            saveFile << results[i].getMathMean()+",";
+            saveFile << results[i].getWritingMean()+"\n";
+        }
+        saveFile.flush();
+        saveFile.close();
+    }
+    else {
+        this->view.showWarningOpenFile();
+    }
 }

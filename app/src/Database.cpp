@@ -49,9 +49,11 @@ void Database::parseCsv(std::promise<std::unordered_map<std::string, DatabaseRec
         }
     }
     else {
+        reader.close();
         promise.set_value(data);  // Keep promise even if file is not found
         return;
     }
+    reader.close();
     promise.set_value(data);      // Keep promise!
 }
 

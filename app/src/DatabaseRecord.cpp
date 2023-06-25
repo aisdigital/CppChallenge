@@ -21,6 +21,7 @@ DatabaseRecord::DatabaseRecord() :
 
 DatabaseRecord::~DatabaseRecord() {}
 
+//Getters
 std::string DatabaseRecord::getDbn() const {
     return this->dbn;
 }

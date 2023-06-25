@@ -1,3 +1,4 @@
+#include <filesystem>
 #include "View.hpp"
 #include "Database.hpp"
 
@@ -18,5 +19,5 @@ private:
     View view;
     Database db;
 
-    void saveResultsToCsv(std::string fileName);
+    void saveResultsToCsv(std::vector<DatabaseRecord> results, std::string fileName);
 };

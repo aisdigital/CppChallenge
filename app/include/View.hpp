@@ -22,4 +22,5 @@ public:
     void printRecord(DatabaseRecord record);
     void waitInputReturnToMenu();
     void showExitMsg();
+    void showWarningOpenFile();
 };

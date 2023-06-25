@@ -67,7 +67,7 @@ std::string View::querySaveFileName() {
 bool View::querySaveFile() {
     while(true) {
         char input;
-        std::cout << "Save search results? [y/n]";
+        std::cout << "Save search results? [y/n]: ";
         std::cin >> input;
         if(input == 'y' || input == 'Y') {
             return true;
@@ -84,10 +84,14 @@ bool View::querySaveFile() {
     }
 }
 
+/// @brief Shows a warning message when a search term is not found
+/// @param searchTerm The search term that was not found
 void View::showWarningNotFound(std::string searchTerm) {
     std::cout << "\nNo results were found for " << "\033[33m" << searchTerm << "\033[0m" << std::endl;
 }
 
+/// @brief Print formatted DatabaseRecord
+/// @param record DatabaseRecord to print
 void View::printRecord(DatabaseRecord record) {
     std::cout << "\n---------------------------------------------------------------------" << std::endl;
     std::cout << "DBN: " << record.getDbn() << std::endl;
@@ -99,12 +103,19 @@ void View::printRecord(DatabaseRecord record) {
     std::cout << "---------------------------------------------------------------------" << std::endl;
 }
 
+/// @brief Waits for the user to enter a key before continuing
 void View::waitInputReturnToMenu() {
     while (std::cin.get() != 'c') {
         std::cout << "\nEnter [c] to continue to menu: ";
     }
 }
 
+/// @brief Message to show when application exits
 void View::showExitMsg() {
     std::cout << "\nExiting..." << std::endl;
+}
+
+/// @brief Show warning message for opening a file
+void View::showWarningOpenFile() {
+    std::cout << "\033[33m" << "Warning: could not open output write file!" << "\033[0m" <<std::endl;
 }
