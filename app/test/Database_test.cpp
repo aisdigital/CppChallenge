@@ -3,9 +3,6 @@
 
 #include "Database.hpp"
 #include "DatabaseRecord.hpp"
-#include "tools/cpp/runfiles/runfiles.h"
-
-using bazel::tools::cpp::runfiles::Runfiles;
 
 TEST(DatabaseTest, testSearchByDbnSuccess)
 {

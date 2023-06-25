@@ -13,8 +13,7 @@ cc_test (
     name = "cpp_challenge_test",
     srcs = glob(["test/*.cpp"]),
     deps = [":lib_cli",
-            "@com_google_googletest//:gtest_main",
-            "@bazel_tools//tools/cpp/runfiles",],
+            "@com_google_googletest//:gtest_main"],
     data = ["test/testFile.csv"],
     copts = ['-std=c++17']
 )
