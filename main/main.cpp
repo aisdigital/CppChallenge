@@ -40,9 +40,10 @@ void optionSearchBySchoolName(const LevelResults &levelResults)
     if (save == "yes")
     {
       std::cout << "\nPlease, inform the file name: ";
-      std::string filename{};
-      std::cin >> filename;
-      if (!CSVParser::writeCSVFile(filename, subTable))
+      std::string path{};
+      std::cin >> path;
+      path = "output\\" + path;
+      if (!CSVParser::writeCSVFile(path, subTable))
       {
         std::cout << "\nUnable to write file.\n";
 
