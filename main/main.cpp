@@ -1,13 +1,10 @@
 // Challenge C++ AISDigital
 
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include "csv_parser.hpp"
 #include "level_results.hpp"
-
-
-
-
 
 void optionSearchBySchoolName(const LevelResults &levelResults)
 {
@@ -24,7 +21,7 @@ void optionSearchBySchoolName(const LevelResults &levelResults)
     std::cout << "\n"
               << subTable.size() << " schools found.\n\n";
     std::cout << "\nDBN | School Name | Number of Test Takers | Critical Reading Mean | Mathematics Mean | Writing Mean\n";
-  
+
     for (auto &row : subTable)
     {
       for (auto &cell : row)
@@ -42,24 +39,20 @@ void optionSearchBySchoolName(const LevelResults &levelResults)
       std::cout << "\nPlease, inform the file name: ";
       std::string path{};
       std::cin >> path;
-      path = "output\\" + path;
+      path = "output\\" + path + ".csv";
       if (!CSVParser::writeCSVFile(path, subTable))
       {
         std::cout << "\nUnable to write file.\n";
-
       }
-
     }
     else if (save == "no")
     {
       std::cout << "\nReturning to main menu... \n";
-
     }
-    else 
+    else
     {
       std::cout << "\nWrong option: " << save << "\n\n";
     }
-
   }
 }
 
@@ -71,9 +64,9 @@ void optionSearchByDBN(const LevelResults &levelResults)
   auto row = levelResults.queryByDBN(dbn);
   if (row.empty())
   {
-      std::cout << "\n DBN " << dbn << " not found. \n" ;
+    std::cout << "\n DBN " << dbn << " not found. \n";
   }
-  else 
+  else
   {
     std::cout << "\n\nDBN | School Name | Number of Test Takers | Critical Reading Mean | Mathematics Mean | Writing Mean\n";
 
@@ -82,14 +75,13 @@ void optionSearchByDBN(const LevelResults &levelResults)
       std::cout << cell << "    ";
     }
     std::cout << "\n"
-              << std::endl;  
+              << std::endl;
   }
-
-
 }
 
 int main(int argc, const char *argv[])
 {
+  static constexpr auto ARG_POS = 1;
   static constexpr auto SEARCH_BY_NAME_CODE = "1";
   static constexpr auto SEARCH_BY_DBN_CODE = "2";
   static constexpr auto EXIT_CODE = "3";
@@ -104,58 +96,49 @@ int main(int argc, const char *argv[])
   std::cout << "Challenge C++" << std::endl;
 
   LevelResults lr;
+
+  std::ifstream file{argv[ARG_POS]};
+  if (file.is_open())
   {
-    CSVParser loader;
-    if (loader.loadCSV(std::string{argv[1]}))
     {
-
+      CSVParser loader;
+      std::stringstream strStream;
+      strStream << file.rdbuf();
+      loader.loadCSV(strStream);
       lr.processCSVTable(loader.getCSVTable());
-      // auto r = lr.queryBySchoolName("QUEENS");
-
-      /*
-      for (auto &row : r)
-      {
-        std::cout << row.size() << "\n";
-        for (auto &cell : row)
-        {
-          std::cout << cell << "\n";
-        }
-        std::cout << "\n"
-                  << std::endl;
-      }
-      */
-      std::string code{""}; // Using string as code to avoid cin locking.
-      while (code != EXIT_CODE)
-      {
-        std::cout << "\n1. Search by school name\n";
-        std::cout << "2. Search by DBN\n";
-        std::cout << "3. Exit\n\n";
-
-        std::cin >> code;
-        if (code == SEARCH_BY_NAME_CODE)
-        {
-          optionSearchBySchoolName(lr);
-        }
-        else if (code == SEARCH_BY_DBN_CODE)
-        {
-          optionSearchByDBN(lr);
-        }
-        else if (code == EXIT_CODE)
-        {
-          std::cout << "Exiting program..."
-                    << "\n\n";
-        }
-        else
-        {
-          std::cout << "Wrong option: " << code << "\n\n";
-        }
-      }
     }
-    else
+
+    std::string code{""}; // Using string as code to avoid cin locking.
+    while (code != EXIT_CODE)
     {
-      std::cout << "Failed to load file " << argv[1] << ". Verify if the file exists or is in the correct CSV format." << std::endl;
-      return EXIT_FAILURE;
+      std::cout << "\n1. Search by school name\n";
+      std::cout << "2. Search by DBN\n";
+      std::cout << "3. Exit\n\n";
+
+      std::cin >> code;
+      if (code == SEARCH_BY_NAME_CODE)
+      {
+        optionSearchBySchoolName(lr);
+      }
+      else if (code == SEARCH_BY_DBN_CODE)
+      {
+        optionSearchByDBN(lr);
+      }
+      else if (code == EXIT_CODE)
+      {
+        std::cout << "Exiting program..."
+                  << "\n\n";
+      }
+      else
+      {
+        std::cout << "Wrong option: " << code << "\n\n";
+      }
     }
+  }
+  else
+  {
+    std::cout << "Failed to load file " << argv[1] << ". Verify if the file exists or is in the correct CSV format." << std::endl;
+    return EXIT_FAILURE;
   }
 
   return EXIT_SUCCESS;

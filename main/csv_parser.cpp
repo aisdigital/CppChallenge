@@ -1,34 +1,27 @@
 
-#include <fstream>
-#include <sstream>
 
 #include "csv_parser.hpp"
+#include <fstream>
 
-bool CSVParser::loadCSV(const std::string &path)
+void CSVParser::loadCSV(std::stringstream& stream)
 {
-    std::ifstream file{path};
-    if (file.is_open())
-    {
-        std::string line;
-        std::string word;
-        std::vector<std::string> row;
 
-        while (std::getline(file, line))
+    std::string line;
+    std::string word;
+    std::vector<std::string> row;
+
+    while (std::getline(stream, line))
+    {
         {
             row = parseRow(line);
-            table.push_back(row);
+            data.push_back(row);
         }
-        return true;
-    }
-    else
-    {
-        return false;
     }
 }
 
 const CSVTable &CSVParser::getCSVTable() const
 {
-    return table;
+    return data;
 }
 
 bool CSVParser::writeCSVFile(const std::string &path, const CSVTable &table)
@@ -41,7 +34,10 @@ bool CSVParser::writeCSVFile(const std::string &path, const CSVTable &table)
             for (size_t i = 0; i < row.size(); i++)
             {
                 file << row.at(i);
-                if(i != row.size() - 1) file << ",";
+                if(i != row.size() - 1)
+                { 
+                    file << ",";
+                }
             }
             file << "\n";
         }
@@ -57,26 +53,26 @@ CSVRow CSVParser::parseRow(const std::string &row) const
     static constexpr auto QUOTE = '\"';
     enum class State
     {
-        Unquoted,
+        NonQuoted,
         Quoted,
         DoubleQuoted
     };
 
     std::vector<std::string> cell{""};
-    auto current_state = State::Unquoted; // We default the line as unquoted
+    auto current_state = State::NonQuoted; // We default the line as non-quoted
     auto index = 0;
 
     // State machine
     // Process character by character to take into account
     // three cases possible on a CSV row:
-    // 1. Normal unquoted strings
+    // 1. Normal non-quoted strings
     // 2. Quoted strings with possible embedded commas
     // 3. Double quoted strings with possible embedded commnas
     for (auto character : row)
     {
         switch (current_state)
         {
-        case State::Unquoted:
+        case State::NonQuoted:
             switch (character)
             {
             case COMMA:
@@ -107,7 +103,7 @@ CSVRow CSVParser::parseRow(const std::string &row) const
             {
             case COMMA:
                 cell.push_back("");
-                current_state = State::Unquoted;
+                current_state = State::NonQuoted;
                 ++index;
                 break;
             case QUOTE:
@@ -115,7 +111,7 @@ CSVRow CSVParser::parseRow(const std::string &row) const
                 current_state = State::Quoted;
                 break;
             default:
-                current_state = State::Unquoted;
+                current_state = State::NonQuoted;
                 break;
             }
             break;
@@ -123,3 +119,5 @@ CSVRow CSVParser::parseRow(const std::string &row) const
     }
     return cell;
 }
+
+

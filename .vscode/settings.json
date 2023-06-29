@@ -72,6 +72,7 @@
         "regex": "cpp",
         "unordered_map": "cpp",
         "xlocbuf": "cpp",
-        "xlocmes": "cpp"
+        "xlocmes": "cpp",
+        "filesystem": "cpp"
     }
 }
