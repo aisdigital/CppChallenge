@@ -1,16 +1,11 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
-
-cc_library(
-    name = "doctest",
-    hdrs = ["doctest.h"],
-)
+load("@rules_cc//cc:defs.bzl", "cc_binary")
 
 cc_binary(
     name = "cpp-challenge-tests",
     srcs = ["main.cpp"],
     deps = [
-        ":doctest",
-        "//main:cpp-challenge-lib"
+        "//main:cpp-challenge-lib",
+        "@com_google_googletest//:gtest_main"
     ],
 
 )

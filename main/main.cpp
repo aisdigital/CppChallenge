@@ -93,9 +93,9 @@ int main(int argc, const char *argv[])
     return EXIT_FAILURE;
   }
 
-  std::cout << "Challenge C++" << std::endl;
+  std::cout << "Challenge C++\n" << std::endl;
 
-  LevelResults lr;
+  LevelResults levelResults;
 
   std::ifstream file{argv[ARG_POS]};
   if (file.is_open())
@@ -105,7 +105,7 @@ int main(int argc, const char *argv[])
       std::stringstream strStream;
       strStream << file.rdbuf();
       loader.loadCSV(strStream);
-      lr.processCSVTable(loader.getCSVTable());
+      levelResults.processCSVTable(loader.getCSVTable());
     }
 
     std::string code{""}; // Using string as code to avoid cin locking.
@@ -118,11 +118,11 @@ int main(int argc, const char *argv[])
       std::cin >> code;
       if (code == SEARCH_BY_NAME_CODE)
       {
-        optionSearchBySchoolName(lr);
+        optionSearchBySchoolName(levelResults);
       }
       else if (code == SEARCH_BY_DBN_CODE)
       {
-        optionSearchByDBN(lr);
+        optionSearchByDBN(levelResults);
       }
       else if (code == EXIT_CODE)
       {
