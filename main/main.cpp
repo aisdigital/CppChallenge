@@ -1,90 +1,11 @@
 // Challenge C++ AISDigital
-
 #include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include "csv_parser.hpp"
-#include "level_results.hpp"
-
-void optionSearchBySchoolName(const LevelResults &levelResults)
-{
-  std::string schoolName{};
-  std::cout << "\n1. Search for term...: ";
-  std::cin >> schoolName;
-  auto subTable = levelResults.queryBySchoolName(schoolName);
-  if (subTable.empty())
-  {
-    std::cout << "\nNo schools with term " << schoolName << " found.\n";
-  }
-  else
-  {
-    std::cout << "\n"
-              << subTable.size() << " schools found.\n\n";
-    std::cout << "\nDBN | School Name | Number of Test Takers | Critical Reading Mean | Mathematics Mean | Writing Mean\n";
-
-    for (auto &row : subTable)
-    {
-      for (auto &cell : row)
-      {
-        std::cout << cell << "    ";
-      }
-      std::cout << "\n"
-                << std::endl;
-    }
-    std::string save{};
-    std::cout << "\n Do you want to save this search to a file? yes or no \n";
-    std::cin >> save;
-    if (save == "yes")
-    {
-      std::cout << "\nPlease, inform the file name: ";
-      std::string path{};
-      std::cin >> path;
-      path = "output\\" + path + ".csv";
-      if (!CSVParser::writeCSVFile(path, subTable))
-      {
-        std::cout << "\nUnable to write file.\n";
-      }
-    }
-    else if (save == "no")
-    {
-      std::cout << "\nReturning to main menu... \n";
-    }
-    else
-    {
-      std::cout << "\nWrong option: " << save << "\n\n";
-    }
-  }
-}
-
-void optionSearchByDBN(const LevelResults &levelResults)
-{
-  std::string dbn;
-  std::cout << "\n1. Search for DBN...: ";
-  std::cin >> dbn;
-  auto row = levelResults.queryByDBN(dbn);
-  if (row.empty())
-  {
-    std::cout << "\n DBN " << dbn << " not found. \n";
-  }
-  else
-  {
-    std::cout << "\n\nDBN | School Name | Number of Test Takers | Critical Reading Mean | Mathematics Mean | Writing Mean\n";
-
-    for (auto &cell : row)
-    {
-      std::cout << cell << "    ";
-    }
-    std::cout << "\n"
-              << std::endl;
-  }
-}
+#include "application.hpp"
 
 int main(int argc, const char *argv[])
 {
   static constexpr auto ARG_POS = 1;
-  static constexpr auto SEARCH_BY_NAME_CODE = "1";
-  static constexpr auto SEARCH_BY_DBN_CODE = "2";
-  static constexpr auto EXIT_CODE = "3";
+
 
   if (argc < 2)
   {
@@ -93,47 +14,11 @@ int main(int argc, const char *argv[])
     return EXIT_FAILURE;
   }
 
-  std::cout << "Challenge C++\n" << std::endl;
+  Application app;
 
-  LevelResults levelResults;
-
-  std::ifstream file{argv[ARG_POS]};
-  if (file.is_open())
+  if (app.setup(argv[ARG_POS]))
   {
-    {
-      CSVParser loader;
-      std::stringstream strStream;
-      strStream << file.rdbuf();
-      loader.loadCSV(strStream);
-      levelResults.processCSVTable(loader.getCSVTable());
-    }
-
-    std::string code{""}; // Using string as code to avoid cin locking.
-    while (code != EXIT_CODE)
-    {
-      std::cout << "\n1. Search by school name\n";
-      std::cout << "2. Search by DBN\n";
-      std::cout << "3. Exit\n\n";
-
-      std::cin >> code;
-      if (code == SEARCH_BY_NAME_CODE)
-      {
-        optionSearchBySchoolName(levelResults);
-      }
-      else if (code == SEARCH_BY_DBN_CODE)
-      {
-        optionSearchByDBN(levelResults);
-      }
-      else if (code == EXIT_CODE)
-      {
-        std::cout << "Exiting program..."
-                  << "\n\n";
-      }
-      else
-      {
-        std::cout << "Wrong option: " << code << "\n\n";
-      }
-    }
+    app.run();
   }
   else
   {

@@ -73,6 +73,11 @@
         "unordered_map": "cpp",
         "xlocbuf": "cpp",
         "xlocmes": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "any": "cpp",
+        "array": "cpp",
+        "condition_variable": "cpp",
+        "deque": "cpp",
+        "variant": "cpp"
     }
 }
