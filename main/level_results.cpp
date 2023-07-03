@@ -34,7 +34,7 @@ CSVTable LevelResults::queryBySchoolName(const std::string &name) const
         table.push_back(current_itr->second);
         current_itr++;
     }
-    std::sort(std::begin(table), std::end(table), [&](auto& a, auto&b){ return a[SCHOOL_NAME_POSITION] < b[SCHOOL_NAME_POSITION]; });
+    std::sort(std::begin(table), std::end(table), [&](const auto& a, const auto&b){ return a[SCHOOL_NAME_POSITION] < b[SCHOOL_NAME_POSITION]; });
     return table;
 }
 

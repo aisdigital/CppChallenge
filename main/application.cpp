@@ -78,7 +78,7 @@ void Application::optionSearchBySchoolName()
 
         for (auto &row : subTable)
         {
-            for (auto &cell : row)
+            for (const auto &cell : row)
             {
                 std::cout << cell << "    ";
             }
@@ -124,7 +124,7 @@ void Application::optionSearchByDBN()
     {
         std::cout << "\n\nDBN | School Name | Number of Test Takers | Critical Reading Mean | Mathematics Mean | Writing Mean\n";
 
-        for (auto &cell : row)
+        for (const auto &cell : row)
         {
             std::cout << cell << "    ";
         }

@@ -7,7 +7,6 @@ void CSVParser::loadCSV(std::stringstream& stream)
 {
 
     std::string line;
-    std::string word;
     std::vector<std::string> row;
 
     while (std::getline(stream, line))
@@ -29,7 +28,7 @@ bool CSVParser::writeCSVFile(const std::string &path, const CSVTable &table)
     std::ofstream file{path};
     if (file.is_open())
     {
-        for (auto &row : table)
+        for (const auto &row : table)
         {
             for (size_t i = 0; i < row.size(); i++)
             {
