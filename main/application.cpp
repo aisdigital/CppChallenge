@@ -76,7 +76,7 @@ void Application::optionSearchBySchoolName()
                   << subTable.size() << " schools found.\n\n";
         std::cout << "\nDBN | School Name | Number of Test Takers | Critical Reading Mean | Mathematics Mean | Writing Mean\n";
 
-        for (auto &row : subTable)
+        for (const auto &row : subTable)
         {
             for (const auto &cell : row)
             {
